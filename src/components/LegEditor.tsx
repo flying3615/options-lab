@@ -27,7 +27,7 @@ export default function LegEditor({ strategy, onChange }: Props) {
           <div key={leg.id} style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', border: '1px dashed var(--border)', padding: 8, borderRadius: 6 }}>
             <span className="tag">{leg.kind === 'stock' ? '股票' : `${leg.option?.type.toUpperCase()} 期权`}</span>
             <span className="tag">{leg.position}</span>
-            <label style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: 4, whiteSpace: 'nowrap' }}>
               数量
               <input
                 type="number"
@@ -41,7 +41,7 @@ export default function LegEditor({ strategy, onChange }: Props) {
               />
             </label>
             {leg.kind === 'option' && (
-              <label style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 4, whiteSpace: 'nowrap' }}>
                 执行价
                 <input
                   type="number"
@@ -58,7 +58,7 @@ export default function LegEditor({ strategy, onChange }: Props) {
                 />
               </label>
             )}
-            <label style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: 4, whiteSpace: 'nowrap' }}>
               {leg.kind === 'stock' ? '成本' : '权利金'}
               <input
                 type="number"

@@ -156,8 +156,8 @@ export default function Builder() {
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {draft.legs.map((leg, i) => (
-            <div key={leg.id} className="card" style={{ padding: 10, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(160px,1fr))', gap: 8, alignItems: 'center' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <div key={leg.id} className="card" style={{ padding: 10, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 8, alignItems: 'center' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap' }}>
                 类型
                 <select
                   value={leg.kind}
@@ -185,7 +185,7 @@ export default function Builder() {
                 </select>
               </label>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap' }}>
                 方向
                 <select
                   value={leg.position}
@@ -196,7 +196,7 @@ export default function Builder() {
                 </select>
               </label>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap' }}>
                 数量
                 <input
                   type="number"
@@ -208,7 +208,7 @@ export default function Builder() {
               </label>
 
               {leg.kind === 'option' && (
-                <label style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap' }}>
                   类型
                   <select
                     value={leg.option?.type ?? 'call'}
@@ -221,7 +221,7 @@ export default function Builder() {
               )}
 
               {leg.kind === 'option' && (
-                <label style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap' }}>
                   执行价
                   <input
                     type="number"
@@ -232,7 +232,7 @@ export default function Builder() {
                 </label>
               )}
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap' }}>
                 {leg.kind === 'stock' ? '成本' : '权利金'}
                 <input
                   type="number"
@@ -243,7 +243,7 @@ export default function Builder() {
               </label>
 
               {leg.kind === 'option' && (
-                <label style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap' }}>
                   乘数
                   <input
                     type="number"
