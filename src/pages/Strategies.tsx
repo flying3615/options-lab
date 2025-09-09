@@ -30,6 +30,9 @@ export default function Strategies() {
   return (
     <section>
       <h1>策略库</h1>
+      <p style={{ margin: '8px 0 16px', color: '#667085', fontSize: 13 }}>
+        说明：本页所有策略示例均以标的当前价格 100 元为基准（S0=100），用于统一展示与对比。
+      </p>
 
       {groups.map((g) => (
         <div key={g.name} style={{ marginBottom: 16 }}>

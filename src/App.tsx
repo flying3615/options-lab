@@ -1,5 +1,5 @@
 import './App.css'
-import { Link, Route, Routes } from 'react-router-dom'
+import { Link, NavLink, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Strategies from './pages/Strategies'
 import StrategyDetail from './pages/StrategyDetail'
@@ -14,12 +14,22 @@ function App() {
   return (
     <div className="container">
       <nav className="nav">
-        <div className="brand">Options Lab</div>
-        <ul>
-          <li><Link to="/">首页</Link></li>
-          <li><Link to="/strategies">策略库</Link></li>
-          <li><Link to="/compare">对比</Link></li>
-          <li><Link to="/disclaimer">声明</Link></li>
+        <Link to="/" className="brand">
+          <span className="brand-text">Options Lab</span>
+        </Link>
+        <ul className="menu">
+          <li>
+            <NavLink to="/" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>首页</NavLink>
+          </li>
+          <li>
+            <NavLink to="/strategies" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>策略库</NavLink>
+          </li>
+          <li>
+            <NavLink to="/compare" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>对比</NavLink>
+          </li>
+          <li>
+            <NavLink to="/disclaimer" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>声明</NavLink>
+          </li>
         </ul>
       </nav>
       <main className="main">
