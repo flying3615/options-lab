@@ -1,0 +1,46 @@
+:root {
+  /* 字体与渲染 */
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+  line-height: 1.6;
+  font-weight: 400;
+
+  /* 主题变量（浅色中性） */
+  --bg: #f7f8fa;
+  --panel: #ffffff;
+  --panel-border: rgba(0,0,0,0.08);
+  --text: #111827; /* slate-900 */
+  --muted: #6b7280; /* slate-500 */
+  --primary: #2563eb; /* blue-600 */
+  --primary-weak: rgba(37,99,235,0.12);
+  --accent: #16a34a; /* green-600 */
+  --danger: #dc2626; /* red-600 */
+
+  color-scheme: light;
+  color: var(--text);
+  background-color: var(--bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { font-weight: 500; color: var(--primary); text-decoration: none; }
+a:hover { color: #9ab8ff; }
+
+body { margin: 0; display: block; min-width: 320px; min-height: 100vh; }
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button { border-radius: 10px; border: 1px solid var(--panel-border); padding: 0.55em 1.1em; font-size: 14px; font-weight: 600; background: var(--panel); color: var(--text); cursor: pointer; transition: all .2s ease; }
+button:hover { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-weak) inset; }
+button:focus, button:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+@media (prefers-color-scheme: light) {
+  :root { color: #213547; background-color: #ffffff; }
+  a:hover { color: #3355ff; }
+  button { background: #f7f7f9; color: #213547; border-color: rgba(0,0,0,0.08); }
+}
