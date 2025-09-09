@@ -1,16 +1,20 @@
-import { useMemo } from 'react'
+import { useMemo, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { findStrategy } from '../data/strategies'
 import PayoffChart from '../components/PayoffChart'
 import CompositionSteps from '../components/CompositionSteps'
 import SingleLegsChart from '../components/SingleLegsChart'
 import MetricsPanel from '../components/MetricsPanel'
+import LegEditor from '../components/LegEditor'
 
 export default function StrategyDetail() {
   const { id } = useParams()
   const strategy = useMemo(() => (id ? findStrategy(id) : undefined), [id])
+  const [draft, setDraft] = useState(strategy)
+  useEffect(() => { setDraft(strategy) }, [strategy])
+  const s = draft ?? strategy
 
-  if (!strategy) {
+  if (!s) {
     return (
       <section>
         <h1>策略未找到</h1>
@@ -21,12 +25,12 @@ export default function StrategyDetail() {
 
   return (
     <section>
-      <h1>{strategy.name}</h1>
-      {strategy.description && <p>{strategy.description}</p>}
+      <h1>{s.name}</h1>
+      {s.description && <p>{s.description}</p>}
 
-      {strategy.tags && (
+      {s.tags && (
         <p>
-          {strategy.tags.map((t) => (
+          {s.tags.map((t) => (
             <span key={t} className="tag" style={{ marginRight: 8 }}>{t}</span>
           ))}
         </p>
@@ -34,7 +38,7 @@ export default function StrategyDetail() {
 
       <h2>组成腿</h2>
       <ul>
-        {strategy.legs.map((leg) => (
+        {s.legs.map((leg) => (
           <li key={leg.id}>
             {leg.kind === 'stock' ? (
               <span>
@@ -49,52 +53,56 @@ export default function StrategyDetail() {
         ))}
       </ul>
 
-      
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12 }}>
+        <h2 style={{ margin: 0 }}>即时编辑（临时）</h2>
+        <div>
+          <button onClick={() => setDraft(strategy!)} disabled={!strategy}>重置示例</button>
+        </div>
+      </div>
+      <LegEditor strategy={s} onChange={setDraft} />
 
-      
-
-      {(strategy.concept || strategy.formula || strategy.example) && (
+      {(s.concept || s.formula || s.example) && (
         <div style={{ marginTop: 16 }}>
-          {strategy.concept && (
+          {s.concept && (
             <div>
               <h2>概念易懂版</h2>
-              <p>{strategy.concept}</p>
+              <p>{s.concept}</p>
             </div>
           )}
-          {strategy.formula && strategy.formula.length > 0 && (
+          {s.formula && s.formula.length > 0 && (
             <div>
               <h2>关键公式/逻辑</h2>
               <ul>
-                {strategy.formula.map((f) => (
+                {s.formula.map((f) => (
                   <li key={f}><strong>{f}</strong></li>
                 ))}
               </ul>
             </div>
           )}
-          {strategy.example && (
+          {s.example && (
             <div>
               <h2>举例</h2>
-              <p><strong>{strategy.example}</strong></p>
+              <p><strong>{s.example}</strong></p>
             </div>
           )}
         </div>
       )}
 
       <h2>到期盈亏图</h2>
-      <PayoffChart strategy={strategy} />
+      <PayoffChart strategy={s} />
 
-      <MetricsPanel strategy={strategy} />
+      <MetricsPanel strategy={s} />
 
       <h2>单腿到期盈亏（对照学习）</h2>
-      <SingleLegsChart strategy={strategy} />
+      <SingleLegsChart strategy={s} />
 
       <h2>逐步叠加演示</h2>
-      <CompositionSteps strategy={strategy} />
+      <CompositionSteps strategy={s} />
 
-      {strategy.stepNotes && strategy.stepNotes.length > 0 && (
+      {s.stepNotes && s.stepNotes.length > 0 && (
         <div>
           <ul>
-            {strategy.stepNotes.map((n, i) => (
+            {s.stepNotes.map((n, i) => (
               <li key={i}>{n}</li>
             ))}
           </ul>
@@ -102,28 +110,28 @@ export default function StrategyDetail() {
       )}
 
       <div className="info-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 12 }}>
-        {strategy.suitableFor && (
+        {s.suitableFor && (
           <div>
             <h3>适用场景</h3>
-            <ul>{strategy.suitableFor.map((x) => (<li key={x}>{x}</li>))}</ul>
+            <ul>{s.suitableFor.map((x) => (<li key={x}>{x}</li>))}</ul>
           </div>
         )}
-        {strategy.pros && (
+        {s.pros && (
           <div>
             <h3>优点</h3>
-            <ul>{strategy.pros.map((x) => (<li key={x}>{x}</li>))}</ul>
+            <ul>{s.pros.map((x) => (<li key={x}>{x}</li>))}</ul>
           </div>
         )}
-        {strategy.cons && (
+        {s.cons && (
           <div>
             <h3>缺点</h3>
-            <ul>{strategy.cons.map((x) => (<li key={x}>{x}</li>))}</ul>
+            <ul>{s.cons.map((x) => (<li key={x}>{x}</li>))}</ul>
           </div>
         )}
-        {strategy.risks && (
+        {s.risks && (
           <div>
             <h3>风险提示</h3>
-            <ul>{strategy.risks.map((x) => (<li key={x}>{x}</li>))}</ul>
+            <ul>{s.risks.map((x) => (<li key={x}>{x}</li>))}</ul>
           </div>
         )}
       </div>
