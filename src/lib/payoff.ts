@@ -101,9 +101,10 @@ export function computeMetrics(strategy: Strategy, prices: number[]): { curve: P
     if (p.pnl < min) min = p.pnl
     if (p.pnl > max) max = p.pnl
   }
-  // 估算净权利金：把所有 option leg 的 entryPrice * qty * multiplier 汇总（多头为支出，空头为收入）
+  // 估算净权利金：仅统计 option legs 的权利金（不含股票成本）
   const netPremium = strategy.legs.reduce((sum, leg) => {
-    const m = leg.kind === 'option' ? getMultiplier(leg) : 1
+    if (leg.kind !== 'option') return sum
+    const m = getMultiplier(leg)
     const price = leg.entryPrice ?? 0
     const dir = leg.position === 'long' ? -1 : 1 // 购买支出为负，卖出收入为正
     return sum + dir * price * leg.qty * m

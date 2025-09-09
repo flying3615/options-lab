@@ -22,7 +22,7 @@ export default function MetricsPanel({ strategy, title = '关键指标' }: Props
       <h3 style={{ margin: '0 0 8px' }}>{title}</h3>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
         <div>
-          <div style={{ fontSize: 12, color: 'var(--muted)' }}>净权利金</div>
+          <div style={{ fontSize: 12, color: 'var(--muted)' }}>净权利金（仅期权）</div>
           <div style={{ fontWeight: 700, color: netPremium >= 0 ? 'var(--accent)' : 'var(--danger)' }}>
             {formatMoney(netPremium)}
           </div>
