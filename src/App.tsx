@@ -9,6 +9,7 @@ import Basics from './pages/Basics'
 import Volatility from './pages/Volatility'
 import Premium from './pages/Premium'
 import Calendar from './pages/Calendar'
+import Builder from './pages/Builder'
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
           </li>
           <li>
             <NavLink to="/strategies" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>策略库</NavLink>
+          </li>
+          <li>
+            <NavLink to="/builder" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>构建</NavLink>
           </li>
           <li>
             <NavLink to="/compare" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>对比</NavLink>
@@ -42,6 +46,7 @@ function App() {
           <Route path="/strategies" element={<Strategies />} />
           <Route path="/strategies/:id" element={<StrategyDetail />} />
           <Route path="/compare" element={<Compare />} />
+          <Route path="/builder" element={<Builder />} />
           <Route path="/disclaimer" element={<Disclaimer />} />
         </Routes>
       </main>
