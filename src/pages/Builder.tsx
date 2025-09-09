@@ -1,6 +1,5 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import type { Strategy, Leg, LegKind, Position, OptionType } from '../lib/types'
-import { buildPriceRange, computeMetrics } from '../lib/payoff'
 import PayoffChart from '../components/PayoffChart'
 import SingleLegsChart from '../components/SingleLegsChart'
 import MetricsPanel from '../components/MetricsPanel'
@@ -26,8 +25,6 @@ export default function Builder() {
   const [message, setMessage] = useState<string | null>(null)
   const [saved, setSaved] = useState<Strategy[]>(loadUserStrategies())
 
-  const prices = useMemo(() => buildPriceRange(draft.referencePrice, 0.3, 201), [draft.referencePrice])
-  const { curve } = useMemo(() => computeMetrics(draft, prices), [draft, prices])
 
   function addStock(position: Position = 'long') {
     setDraft((d) => ({
