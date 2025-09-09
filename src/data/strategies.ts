@@ -266,7 +266,7 @@ export const strategies: Strategy[] = [
     ],
     legs: [
       { id: 'lc1', kind: 'option', position: 'long', qty: 1, multiplier: 100, entryPrice: 3, option: { type: 'call', strike: 95 } },
-      { id: 'sc2', kind: 'option', position: 'short', qty: 2, multiplier: 100, entryPrice: 2.0, option: { type: 'call', strike: 100 } },
+      { id: 'sc2', kind: 'option', position: 'short', qty: 2, multiplier: 100, entryPrice: 2, option: { type: 'call', strike: 100 } },
       { id: 'lc2', kind: 'option', position: 'long', qty: 1, multiplier: 100, entryPrice: 2, option: { type: 'call', strike: 105 } },
     ],
   },
@@ -286,14 +286,14 @@ export const strategies: Strategy[] = [
       '最大盈利 ≈ 净收取权利金',
       '最大亏损 ≈ (高执行价 - 低执行价) × 合约乘数 - 净收取权利金'
     ],
-    example: '卖出97P收2元，买入94P花0.5元，净收1.5元/股。若到期≥97，赚1.5×100=150；若≤94，亏损≈(97-94)×100 - 150 = 150。',
+    example: '卖出97P收2元，买入94P花1元，净收1元/股。若到期≥97，盈利≈1×100=100；若≤94，亏损≈(97-94)×100 - 100 = 200。',
     stepNotes: [
       'Step 1：卖出较高执行价看跌，赚时间价值但承受下行风险。',
       'Step 2：买入更低执行价看跌，上限风险。'
     ],
     legs: [
-      { id: 'sp-h', kind: 'option', position: 'short', qty: 1, multiplier: 100, entryPrice: 2.0, option: { type: 'put', strike: 97 } },
-      { id: 'lp-l', kind: 'option', position: 'long', qty: 1, multiplier: 100, entryPrice: 0.5, option: { type: 'put', strike: 94 } }
+      { id: 'sp-h', kind: 'option', position: 'short', qty: 1, multiplier: 100, entryPrice: 2, option: { type: 'put', strike: 97 } },
+      { id: 'lp-l', kind: 'option', position: 'long', qty: 1, multiplier: 100, entryPrice: 1, option: { type: 'put', strike: 94 } }
     ],
   },
   {
@@ -318,8 +318,8 @@ export const strategies: Strategy[] = [
       'Step 2：买入更高执行价看涨，封顶风险。'
     ],
     legs: [
-      { id: 'sc-l', kind: 'option', position: 'short', qty: 1, multiplier: 100, entryPrice: 2.0, option: { type: 'call', strike: 103 } },
-      { id: 'lc-h', kind: 'option', position: 'long', qty: 1, multiplier: 100, entryPrice: 1.0, option: { type: 'call', strike: 106 } }
+      { id: 'sc-l', kind: 'option', position: 'short', qty: 1, multiplier: 100, entryPrice: 2, option: { type: 'call', strike: 103 } },
+      { id: 'lc-h', kind: 'option', position: 'long', qty: 1, multiplier: 100, entryPrice: 1, option: { type: 'call', strike: 106 } }
     ],
   },
   {
@@ -346,8 +346,8 @@ export const strategies: Strategy[] = [
     ],
     legs: [
       { id: 'stock', kind: 'stock', position: 'long', qty: 100, entryPrice: 100 },
-      { id: 'lp', kind: 'option', position: 'long', qty: 1, multiplier: 100, entryPrice: 2.0, option: { type: 'put', strike: 95 } },
-      { id: 'sc', kind: 'option', position: 'short', qty: 1, multiplier: 100, entryPrice: 2.0, option: { type: 'call', strike: 105 } }
+      { id: 'lp', kind: 'option', position: 'long', qty: 1, multiplier: 100, entryPrice: 2, option: { type: 'put', strike: 95 } },
+      { id: 'sc', kind: 'option', position: 'short', qty: 1, multiplier: 100, entryPrice: 2, option: { type: 'call', strike: 105 } }
     ],
   },
   {
@@ -372,17 +372,17 @@ export const strategies: Strategy[] = [
       'Step 2：买入更远两翼封顶风险。'
     ],
     legs: [
-      { id: 'sc', kind: 'option', position: 'short', qty: 1, multiplier: 100, entryPrice: 3.0, option: { type: 'call', strike: 100 } },
-      { id: 'sp', kind: 'option', position: 'short', qty: 1, multiplier: 100, entryPrice: 3.0, option: { type: 'put', strike: 100 } },
-      { id: 'bc', kind: 'option', position: 'long', qty: 1, multiplier: 100, entryPrice: 1.0, option: { type: 'call', strike: 106 } },
-      { id: 'bp', kind: 'option', position: 'long', qty: 1, multiplier: 100, entryPrice: 1.0, option: { type: 'put', strike: 94 } }
+      { id: 'sc', kind: 'option', position: 'short', qty: 1, multiplier: 100, entryPrice: 3, option: { type: 'call', strike: 100 } },
+      { id: 'sp', kind: 'option', position: 'short', qty: 1, multiplier: 100, entryPrice: 3, option: { type: 'put', strike: 100 } },
+      { id: 'bc', kind: 'option', position: 'long', qty: 1, multiplier: 100, entryPrice: 1, option: { type: 'call', strike: 106 } },
+      { id: 'bp', kind: 'option', position: 'long', qty: 1, multiplier: 100, entryPrice: 1, option: { type: 'put', strike: 94 } }
     ],
   },
   {
     id: 'ratio-call-spread',
     name: '比例看涨（Ratio Call Spread 1x2）',
     referencePrice: 100,
-    tags: ['方向：看多/中性', '收取权利金', '风险：无限'],
+    tags: ['方向：看多/中性', '净保费：0', '风险：无限'],
     summary: '买入1份较低执行价看涨，同时卖出2份较高执行价看涨；中等上涨区域获利，极端上涨风险扩大。',
     description: '用两份更高执行价的卖出看涨来补贴较低执行价的买入看涨，形成在某一上方区间收益较高、极端上涨风险扩大的形状。',
     suitableFor: ['温和上涨且不预期极端大涨'],
@@ -394,10 +394,10 @@ export const strategies: Strategy[] = [
       '净保费 ≈ 2×高执行价保费 - 低执行价保费',
       '极端上涨风险：理论无限'
     ],
-    example: '买入100C花4元，卖出2×105C各收2.2元，净收0.4元/股。若到期≈105附近收益较佳；若大涨远超105，风险增大。',
+    example: '买入100C花4元，卖出2×105C各收2元，净收0元/股。若到期≈105附近收益较佳；若大涨远超105，风险增大。',
     legs: [
-      { id: 'lc', kind: 'option', position: 'long', qty: 1, multiplier: 100, entryPrice: 4.0, option: { type: 'call', strike: 100 } },
-      { id: 'sc1', kind: 'option', position: 'short', qty: 2, multiplier: 100, entryPrice: 2.2, option: { type: 'call', strike: 105 } }
+      { id: 'lc', kind: 'option', position: 'long', qty: 1, multiplier: 100, entryPrice: 4, option: { type: 'call', strike: 100 } },
+      { id: 'sc1', kind: 'option', position: 'short', qty: 2, multiplier: 100, entryPrice: 2, option: { type: 'call', strike: 105 } }
     ],
   }
 ,

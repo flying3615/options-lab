@@ -55,14 +55,32 @@ export function computePayoffCurve(strategy: Strategy, prices: number[]): Payoff
 
 export function estimateBreakEvens(curve: PayoffPoint[]): number[] {
   const results: number[] = []
+  const eps = 1e-8
+  const sign = (x: number) => (Math.abs(x) <= eps ? 0 : x > 0 ? 1 : -1)
+
   for (let i = 1; i < curve.length; i++) {
     const a = curve[i - 1]
     const b = curve[i]
-    if ((a.pnl <= 0 && b.pnl >= 0) || (a.pnl >= 0 && b.pnl <= 0)) {
-      const t = a.pnl === b.pnl ? 0 : Math.abs(a.pnl) / (Math.abs(a.pnl) + Math.abs(b.pnl))
-      const x = a.s + (b.s - a.s) * t
-      results.push(roundTo(x, 2))
+    const sa = sign(a.pnl)
+    const sb = sign(b.pnl)
+
+    // 同号或都为 0：不产生新的盈亏平衡点
+    if (sa === sb) continue
+
+    // 其中一个恰好为 0，另一个非 0：记录该 0 点的价格
+    if (sa === 0 && sb !== 0) {
+      results.push(roundTo(a.s, 2))
+      continue
     }
+    if (sb === 0 && sa !== 0) {
+      results.push(roundTo(b.s, 2))
+      continue
+    }
+
+    // 一正一负：线性插值寻找交点
+    const t = Math.abs(a.pnl) / (Math.abs(a.pnl) + Math.abs(b.pnl))
+    const x = a.s + (b.s - a.s) * t
+    results.push(roundTo(x, 2))
   }
   return dedupeSorted(results)
 }
