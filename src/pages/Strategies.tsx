@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { strategies } from '../data/strategies'
 import StrategyCard from '../components/StrategyCard'
+import { loadUserStrategies } from '../lib/userStrategies'
 
 type Group = { name: string; items: typeof strategies }
 
@@ -17,6 +18,7 @@ function classify(name: string, tags?: string[]): '看多' | '看空' | '中性'
 
 export default function Strategies() {
   const groups = useMemo<Group[]>(() => {
+    // 方向分组（内置策略）
     const map = new Map<string, typeof strategies>()
     for (const s of strategies) {
       const g = classify(s.name, s.tags)
@@ -24,7 +26,16 @@ export default function Strategies() {
       map.get(g)!.push(s)
     }
     const order: Array<'看多' | '看空' | '中性'> = ['看多', '看空', '中性']
-    return order.filter((g) => map.has(g)).map((g) => ({ name: g, items: map.get(g)! }))
+    const out: Group[] = order
+      .filter((g) => map.has(g))
+      .map((g) => ({ name: g as string, items: map.get(g)! } as Group))
+
+    // 本地保存的“我的策略”
+    const mine = loadUserStrategies()
+    if (mine.length) {
+      out.unshift({ name: '我的策略', items: mine as any })
+    }
+    return out
   }, [])
 
   return (
