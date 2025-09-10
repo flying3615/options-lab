@@ -10,6 +10,7 @@ import Volatility from './pages/Volatility'
 import Premium from './pages/Premium'
 import Calendar from './pages/Calendar'
 import Builder from './pages/Builder'
+import Box from './pages/Box'
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path="/strategies/:id" element={<StrategyDetail />} />
           <Route path="/compare" element={<Compare />} />
           <Route path="/builder" element={<Builder />} />
+          <Route path="/box" element={<Box />} />
           <Route path="/disclaimer" element={<Disclaimer />} />
         </Routes>
       </main>
