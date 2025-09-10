@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import ReactECharts from 'echarts-for-react'
 import type { Strategy } from '../lib/types'
 import { buildPriceRange, computePayoffCurve } from '../lib/payoff'
@@ -15,6 +15,11 @@ export default function CompositionSteps({ strategy }: Props) {
     () => strategy.legs.map((_, i) => ({ name: `Step ${i + 1}`, legs: strategy.legs.slice(0, i + 1) })),
     [strategy.legs]
   )
+
+  // 保证 step 在腿数量变化时被夹在 [1, legs.length]，避免回退/前进后无法恢复
+  useEffect(() => {
+    setStep((s) => Math.min(Math.max(1, s), strategy.legs.length || 1))
+  }, [strategy.legs.length])
 
   const series = useMemo(() => {
     if (mode === 'single') {
@@ -65,7 +70,12 @@ export default function CompositionSteps({ strategy }: Props) {
         <button onClick={() => setMode('cumulative')} style={{ borderColor: mode === 'cumulative' ? 'var(--primary)' : undefined }}>累积</button>
       </div>
       {note && <p style={{ marginTop: 0, color: 'var(--muted)' }}>{note}</p>}
-      <ReactECharts option={option} style={{ height: 300 }} />
+      <ReactECharts
+        option={option}
+        style={{ height: 300 }}
+        notMerge={true}
+        key={`${mode}-${step}-${strategy.legs.length}`}
+      />
     </div>
   )
 }
