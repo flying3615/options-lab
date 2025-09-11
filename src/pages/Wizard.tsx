@@ -14,7 +14,6 @@ interface Suggestion {
 export default function Wizard() {
   const [step, setStep] = useState(1);
   const [outlook, setOutlook] = useState<Outlook | null>(null);
-  const [risk, setRisk] = useState<RiskTolerance | null>(null);
   const [suggestion, setSuggestion] = useState<Suggestion | null>(null);
 
   const handleOutlookSelect = (o: Outlook) => {
@@ -23,7 +22,6 @@ export default function Wizard() {
   };
 
   const handleRiskSelect = (r: RiskTolerance) => {
-    setRisk(r);
     let result: Suggestion;
 
     switch (outlook) {
@@ -89,7 +87,6 @@ export default function Wizard() {
   const reset = () => {
     setStep(1);
     setOutlook(null);
-    setRisk(null);
     setSuggestion(null);
   };
 

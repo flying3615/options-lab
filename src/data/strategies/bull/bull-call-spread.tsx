@@ -1,3 +1,5 @@
+import type { Strategy } from '../../../lib/types';
+
 const strategy: Strategy = {
   id: 'bull-call-spread',
   name: '牛市看涨借方价差 (Bull Call Debit Spread)',
