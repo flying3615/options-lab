@@ -5,11 +5,13 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <div className={styles.hero}>
-        <h1 className={styles.heroTitle}>期权策略实验室</h1>
-        <p className={styles.heroSubtitle}>一个用于学习、比较和构建期权策略的可视化工具</p>
-        <Link to="/strategies" className={styles.ctaButton}>
-          探索策略库
-        </Link>
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroTitle}>期权策略实验室</h1>
+          <p className={styles.heroSubtitle}>一个用于学习、比较和构建期权策略的可视化工具</p>
+          <Link to="/strategies" className={styles.ctaButton}>
+            探索策略库
+          </Link>
+        </div>
       </div>
 
       <main className={styles.main}>
