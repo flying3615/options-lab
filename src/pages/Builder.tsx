@@ -4,6 +4,7 @@ import PayoffChart from '../components/PayoffChart'
 import SingleLegsChart from '../components/SingleLegsChart'
 import MetricsPanel from '../components/MetricsPanel'
 import { upsertUserStrategy, loadUserStrategies, removeUserStrategy } from '../lib/userStrategies'
+import styles from './Builder.module.scss';
 
 function genLegId(prefix = 'leg'): string {
   return prefix + '-' + Math.random().toString(36).slice(2, 8)
@@ -82,17 +83,17 @@ export default function Builder() {
   return (
     <section>
       <h1>策略构建器</h1>
-      <p style={{ color: 'var(--muted)' }}>说明：此处可自由组合“股票腿/期权腿”，实时预览到期盈亏。保存仅写入浏览器 localStorage（不上传）。</p>
+      <p className={styles.muted}>说明：此处可自由组合“股票腿/期权腿”，实时预览到期盈亏。保存仅写入浏览器 localStorage（不上传）。</p>
 
-      <div className="card" style={{ padding: 12, marginBottom: 12 }}>
-        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+      <div className={`card ${styles.cardPadding}`}>
+        <div className={styles.controls}>
           <label>
             名称：
             <input
               type="text"
               value={draft.name}
               onChange={(e) => setDraft({ ...draft, name: e.target.value })}
-              style={{ marginLeft: 8, width: 240 }}
+              className={styles.inputName}
             />
           </label>
           <label>
@@ -102,31 +103,31 @@ export default function Builder() {
               step={1}
               value={draft.referencePrice}
               onChange={(e) => setDraft({ ...draft, referencePrice: Number(e.target.value) || defaultRef })}
-              style={{ marginLeft: 8, width: 120 }}
+              className={styles.inputRef}
             />
           </label>
-          <div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
+          <div className={styles.controlsRight}>
             <button onClick={reset}>重置</button>
             <button onClick={save} className="primary">保存</button>
           </div>
         </div>
-        {message && <div style={{ marginTop: 8, color: 'var(--primary)' }}>{message}</div>}
+        {message && <div className={styles.message}>{message}</div>}
 
-        <div style={{ marginTop: 12 }}>
-          <h3 style={{ margin: '12px 0 8px' }}>已保存的策略（本地）</h3>
+        <div className={styles.savedSection}>
+          <h3 className={styles.savedTitle}>已保存的策略（本地）</h3>
           {saved.length === 0 ? (
-            <p style={{ color: 'var(--muted)', marginTop: 4 }}>暂无已保存策略。</p>
+            <p className={styles.savedEmpty}>暂无已保存策略。</p>
           ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 8 }}>
+            <div className={styles.savedGrid}>
               {saved.map((it) => (
-                <div key={it.id} className="card" style={{ padding: 8, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div key={it.id} className={`card ${styles.savedCard}`}>
                   <div>
-                    <div style={{ fontWeight: 700 }}>{it.name}</div>
-                    <div style={{ fontSize: 12, color: 'var(--muted)' }}>ID: {it.id}</div>
+                    <div className={styles.savedName}>{it.name}</div>
+                    <div className={styles.savedId}>ID: {it.id}</div>
                   </div>
-                  <div style={{ display: 'flex', gap: 6 }}>
+                  <div className={styles.savedButtons}>
                     <button onClick={() => setDraft(it)}>载入</button>
-                    <button onClick={() => { removeUserStrategy(it.id); refreshSaved(); }} style={{ color: 'var(--danger)' }}>删除</button>
+                    <button onClick={() => { removeUserStrategy(it.id); refreshSaved(); }} className={styles.savedDelete}>删除</button>
                   </div>
                 </div>
               ))}
@@ -135,11 +136,11 @@ export default function Builder() {
         </div>
       </div>
 
-      <div className="card" style={{ padding: 12, marginBottom: 12 }}>
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+      <div className={`card ${styles.cardPadding}`}>
+        <div className={styles.addButtons}>
           <button onClick={() => addStock('long')}>添加 股票 多头</button>
           <button onClick={() => addStock('short')}>添加 股票 空头</button>
-          <span style={{ width: 1, background: 'var(--panel-border)' }} />
+          <span className={styles.divider} />
           <button onClick={() => addOption('long', 'call', draft.referencePrice, 3)}>添加 买入 看涨</button>
           <button onClick={() => addOption('short', 'call', draft.referencePrice + 5, 2)}>添加 卖出 看涨</button>
           <button onClick={() => addOption('long', 'put', draft.referencePrice, 3)}>添加 买入 看跌</button>
@@ -149,12 +150,12 @@ export default function Builder() {
 
       <h2>组成腿</h2>
       {draft.legs.length === 0 ? (
-        <p style={{ color: 'var(--muted)' }}>尚未添加腿。使用上方按钮快速添加，或在此处编辑每条腿的参数。</p>
+        <p className={styles.legsEmpty}>尚未添加腿。使用上方按钮快速添加，或在此处编辑每条腿的参数。</p>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <div className={styles.legsSection}>
           {draft.legs.map((leg, i) => (
-            <div key={leg.id} className="card" style={{ padding: 10, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 8, alignItems: 'center' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap' }}>
+            <div key={leg.id} className={`card ${styles.legCard}`}>
+              <label className={styles.label}>
                 类型
                 <select
                   value={leg.kind}
@@ -182,7 +183,7 @@ export default function Builder() {
                 </select>
               </label>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap' }}>
+              <label className={styles.label}>
                 方向
                 <select
                   value={leg.position}
@@ -193,7 +194,7 @@ export default function Builder() {
                 </select>
               </label>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap' }}>
+              <label className={styles.label}>
                 数量
                 <input
                   type="number"
@@ -205,7 +206,7 @@ export default function Builder() {
               </label>
 
               {leg.kind === 'option' && (
-                <label style={{ display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap' }}>
+                <label className={styles.label}>
                   类型
                   <select
                     value={leg.option?.type ?? 'call'}
@@ -218,7 +219,7 @@ export default function Builder() {
               )}
 
               {leg.kind === 'option' && (
-                <label style={{ display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap' }}>
+                <label className={styles.label}>
                   执行价
                   <input
                     type="number"
@@ -229,7 +230,7 @@ export default function Builder() {
                 </label>
               )}
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap' }}>
+              <label className={styles.label}>
                 {leg.kind === 'stock' ? '成本' : '权利金'}
                 <input
                   type="number"
@@ -240,7 +241,7 @@ export default function Builder() {
               </label>
 
               {leg.kind === 'option' && (
-                <label style={{ display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap' }}>
+                <label className={styles.label}>
                   乘数
                   <input
                     type="number"
@@ -252,8 +253,8 @@ export default function Builder() {
                 </label>
               )}
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <button onClick={() => removeLeg(i)} style={{ color: 'var(--danger)' }}>删除此腿</button>
+              <div className={styles.deleteButton}>
+                <button onClick={() => removeLeg(i)} className={styles.savedDelete}>删除此腿</button>
               </div>
             </div>
           ))}
@@ -263,7 +264,7 @@ export default function Builder() {
       <h2>到期盈亏图</h2>
       <PayoffChart strategy={draft} />
 
-      <div className="metrics-grid" style={{ marginTop: 12 }}>
+      <div className={`metrics-grid ${styles.metricsGrid}`}>
         <MetricsPanel strategy={draft} title="关键指标（预览）" />
       </div>
 

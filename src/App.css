@@ -50,3 +50,60 @@ section > h3 { font-size: 16px; margin: 16px 0 8px; }
 .strategy-card .mini-inner { width: 140px; margin: 0 auto; }
 
 .strategy-card .summary { color: #4b5563; }
+
+/* Detail page layout */
+.detail-layout {
+  display: grid;
+  grid-template-columns: 6fr 4fr;
+  gap: 24px;
+}
+
+.sidebar {
+  position: sticky;
+  top: 80px;
+  align-self: start;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+@media (max-width: 900px) {
+  .detail-layout {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    position: static;
+    max-height: none;
+  }
+}
+
+.sidebar h1 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.sidebar h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--panel-border);
+  padding-bottom: 4px;
+}
+
+.sidebar h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.sidebar p, .sidebar ul {
+  color: #374151;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.sidebar ul {
+  padding-left: 20px;
+}
+
+.strategy-card .mini-chart {
+  aspect-ratio: 16 / 9;
+}

@@ -2,6 +2,7 @@ import { useMemo, useState, useEffect } from 'react'
 import ReactECharts from 'echarts-for-react'
 import type { Strategy } from '../lib/types'
 import { buildPriceRange, computePayoffCurve } from '../lib/payoff'
+import styles from './CompositionSteps.module.scss';
 
 interface Props {
   strategy: Strategy
@@ -61,18 +62,18 @@ export default function CompositionSteps({ strategy }: Props) {
 
   return (
     <div>
-      <div style={{ display: 'flex', gap: 8, marginBottom: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+      <div className={styles.controls}>
         <button onClick={() => setStep((s) => Math.max(1, s - 1))}>上一步</button>
         <button onClick={() => setStep((s) => Math.min(strategy.legs.length, s + 1))}>下一步</button>
         <span>步骤：{step} / {strategy.legs.length}</span>
-        <span style={{ marginLeft: 8 }}>显示模式：</span>
-        <button onClick={() => setMode('single')} style={{ borderColor: mode === 'single' ? 'var(--primary)' : undefined }}>单步</button>
-        <button onClick={() => setMode('cumulative')} style={{ borderColor: mode === 'cumulative' ? 'var(--primary)' : undefined }}>累积</button>
+        <span className={styles.stepInfo}>显示模式：</span>
+        <button onClick={() => setMode('single')} className={mode === 'single' ? styles.modeButton : ''}>单步</button>
+        <button onClick={() => setMode('cumulative')} className={mode === 'cumulative' ? styles.modeButton : ''}>累积</button>
       </div>
-      {note && <p style={{ marginTop: 0, color: 'var(--muted)' }}>{note}</p>}
+      {note && <p className={styles.note}>{note}</p>}
       <ReactECharts
         option={option}
-        style={{ height: 300 }}
+        className={styles.chart}
         notMerge={true}
         key={`${mode}-${step}-${strategy.legs.length}`}
       />

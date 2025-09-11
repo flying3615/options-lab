@@ -1,0 +1,37 @@
+.muted {
+  color: var(--muted);
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.input {
+  width: 90px;
+}
+
+.inputR {
+  width: 160px;
+}
+
+.chart {
+  height: 360px;
+}
+
+.grid {
+  margin-top: 12px;
+}
+
+.card {
+  margin-bottom: 12px;
+}
+
+.flexLinks {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}

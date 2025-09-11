@@ -1,6 +1,7 @@
 import ReactECharts from 'echarts-for-react'
 import type { Strategy } from '../lib/types'
 import { buildPriceRange, computePayoffCurve } from '../lib/payoff'
+import styles from './MiniPayoff.module.scss';
 
 export default function MiniPayoff({ strategy }: { strategy: Strategy }) {
   const prices = buildPriceRange(strategy.referencePrice, 0.25, 101)
@@ -17,7 +18,5 @@ export default function MiniPayoff({ strategy }: { strategy: Strategy }) {
       }
     ]
   }
-  return <ReactECharts option={option} style={{ height: 80 }} />
+  return <ReactECharts option={option} className={styles.chart} style={{ height: '100%', width: '100%' }} />
 }
-
-

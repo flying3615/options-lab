@@ -6,11 +6,10 @@ import StrategyDetail from './pages/StrategyDetail'
 import Compare from './pages/Compare'
 import Disclaimer from './pages/Disclaimer'
 import Basics from './pages/Basics'
-import Volatility from './pages/Volatility'
-import Premium from './pages/Premium'
 import Calendar from './pages/Calendar'
 import Builder from './pages/Builder'
 import Box from './pages/Box'
+import Wizard from './pages/Wizard'
 
 function App() {
   return (
@@ -21,19 +20,25 @@ function App() {
         </Link>
         <ul className="menu">
           <li>
-            <NavLink to="/" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>首页</NavLink>
+            <NavLink to="/" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>🏠 首页</NavLink>
           </li>
           <li>
-            <NavLink to="/strategies" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>策略库</NavLink>
+            <NavLink to="/basics" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>🎓 新手入门</NavLink>
           </li>
           <li>
-            <NavLink to="/builder" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>构建</NavLink>
+            <NavLink to="/strategies" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>📚 策略库</NavLink>
           </li>
           <li>
-            <NavLink to="/compare" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>对比</NavLink>
+            <NavLink to="/wizard" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>✨ 策略向导</NavLink>
           </li>
           <li>
-            <NavLink to="/disclaimer" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>声明</NavLink>
+            <NavLink to="/builder" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>🛠️ 构建</NavLink>
+          </li>
+          <li>
+            <NavLink to="/compare" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>⚖️ 对比</NavLink>
+          </li>
+          <li>
+            <NavLink to="/disclaimer" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}> 声明</NavLink>
           </li>
         </ul>
       </nav>
@@ -41,11 +46,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/basics" element={<Basics />} />
-          <Route path="/volatility" element={<Volatility />} />
-          <Route path="/premium" element={<Premium />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/strategies" element={<Strategies />} />
           <Route path="/strategies/:id" element={<StrategyDetail />} />
+          <Route path="/wizard" element={<Wizard />} />
           <Route path="/compare" element={<Compare />} />
           <Route path="/builder" element={<Builder />} />
           <Route path="/box" element={<Box />} />

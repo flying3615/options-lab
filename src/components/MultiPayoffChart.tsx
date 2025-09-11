@@ -2,6 +2,7 @@ import ReactECharts from 'echarts-for-react'
 import type { Strategy } from '../lib/types'
 import { buildPriceRange, computeMetrics } from '../lib/payoff'
 import { useChartPrefs } from '../lib/store'
+import styles from './MultiPayoffChart.module.scss';
 
 export default function MultiPayoffChart({ strategies }: { strategies: Strategy[] }) {
   const { spanPct, steps } = useChartPrefs()
@@ -47,5 +48,5 @@ export default function MultiPayoffChart({ strategies }: { strategies: Strategy[
     series
   }
 
-  return <ReactECharts option={option} style={{ height: 360 }} />
+  return <ReactECharts option={option} className={styles.chart} />
 }

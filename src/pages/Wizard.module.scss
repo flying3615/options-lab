@@ -1,0 +1,71 @@
+.muted {
+  color: var(--muted);
+}
+
+.cardMargin {
+  margin-top: 24px;
+}
+
+.choiceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.choiceCard {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--accent);
+    background-color: var(--bg-tertiary);
+  }
+}
+
+.suggestionBox {
+  margin-top: 24px;
+  padding: 24px;
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  text-align: center;
+
+  h2 {
+    margin: 0;
+    a {
+      color: var(--accent-light);
+    }
+  }
+
+  p {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+}
+
+.smallMuted {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.resetButton {
+  margin-top: 16px;
+  background: transparent;
+  border: none;
+}
+
+.flexButtons {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  align-items: center;
+  justify-content: center;
+}

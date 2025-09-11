@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useMemo, useState } from 'react'
 import ReactECharts from 'echarts-for-react'
 import { buildPriceRange } from '../lib/payoff'
+import styles from './Calendar.module.scss';
 
 type OptType = 'call' | 'put'
 
@@ -121,13 +122,13 @@ export default function Calendar() {
   return (
     <section>
       <h1>日历价差（Calendar Spread）</h1>
-      <p style={{ color: 'var(--muted)' }}>
+      <p className={styles.muted}>
         示例：同一执行价、不同到期。此处演示“近月到期时”的组合盈亏示意。
         远月在近月到期时仍有剩余时间价值，使用 r∈[0,1] 作为“剩余时间价值系数”进行简化可视化。
       </p>
 
-      <div className="card" style={{ marginBottom: 12 }}>
-        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+      <div className={`card ${styles.controls}`}>
+        <div className={styles.controls}>
           <label>方向：</label>
           <select value={opt} onChange={(e) => setOpt(e.target.value as OptType)}>
             <option value="call">看涨日历（Call Calendar）</option>
@@ -135,19 +136,19 @@ export default function Calendar() {
           </select>
 
           <label>执行价 K：</label>
-          <input type="number" value={k} onChange={(e) => setK(Number(e.target.value))} style={{ width: 90 }} />
+          <input type="number" value={k} onChange={(e) => setK(Number(e.target.value))} className={styles.input} />
 
           <label>参考价 S0：</label>
-          <input type="number" value={s0} onChange={(e) => setS0(Number(e.target.value))} style={{ width: 90 }} />
+          <input type="number" value={s0} onChange={(e) => setS0(Number(e.target.value))} className={styles.input} />
 
           <label>近月保费：</label>
-          <input type="number" value={nearPrem} onChange={(e) => setNearPrem(Number(e.target.value))} style={{ width: 90 }} />
+          <input type="number" value={nearPrem} onChange={(e) => setNearPrem(Number(e.target.value))} className={styles.input} />
 
           <label>远月保费：</label>
-          <input type="number" value={farPrem} onChange={(e) => setFarPrem(Number(e.target.value))} style={{ width: 90 }} />
+          <input type="number" value={farPrem} onChange={(e) => setFarPrem(Number(e.target.value))} className={styles.input} />
 
           <label>乘数：</label>
-          <input type="number" value={m} onChange={(e) => setM(Number(e.target.value))} style={{ width: 90 }} />
+          <input type="number" value={m} onChange={(e) => setM(Number(e.target.value))} className={styles.input} />
 
           <label>剩余时间价值 r：</label>
           <input
@@ -157,15 +158,15 @@ export default function Calendar() {
             step={0.01}
             value={r}
             onChange={(e) => setR(Number(e.target.value))}
-            style={{ width: 160 }}
+            className={styles.inputR}
           />
           <span>{r.toFixed(2)}</span>
         </div>
       </div>
 
-      <ReactECharts option={option} style={{ height: 360 }} />
+      <ReactECharts option={option} className={styles.chart} />
 
-      <div className="grid" style={{ marginTop: 12 }}>
+      <div className={`grid ${styles.grid}`}>
         <div className="card">
           <h3>解释与假设</h3>
           <ul>
@@ -176,7 +177,7 @@ export default function Calendar() {
         </div>
         <div className="card">
           <h3>继续学习</h3>
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 8 }}>
+          <div className={styles.flexLinks}>
             <Link to="/volatility"><button>隐含波动率</button></Link>
             <Link to="/premium"><button>溢价与溢价率</button></Link>
             <Link to="/strategies"><button>策略库</button></Link>

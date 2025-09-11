@@ -1,0 +1,29 @@
+.flexButtons {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0 16px;
+  flex-wrap: wrap;
+}
+
+.linkNoDec {
+  text-decoration: none;
+}
+
+.cardPointer {
+  cursor: pointer;
+}
+
+.mutedSmall {
+  margin-top: 8px;
+  color: var(--muted);
+}
+
+.greekExplanation {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.note {
+  margin-top: 16px;
+  color: var(--muted);
+}

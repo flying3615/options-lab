@@ -1,0 +1,129 @@
+.muted {
+  color: var(--muted);
+}
+
+.cardPadding {
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.inputName {
+  margin-left: 8px;
+  width: 240px;
+}
+
+.inputRef {
+  margin-left: 8px;
+  width: 120px;
+}
+
+.controlsRight {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+}
+
+.message {
+  margin-top: 8px;
+  color: var(--primary);
+}
+
+.savedSection {
+  margin-top: 12px;
+}
+
+.savedTitle {
+  margin: 12px 0 8px;
+}
+
+.savedEmpty {
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.savedGrid {
+  display: grid;
+  gridTemplateColumns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 8px;
+}
+
+.savedCard {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.savedName {
+  font-weight: 700;
+}
+
+.savedId {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.savedButtons {
+  display: flex;
+  gap: 6px;
+}
+
+.savedDelete {
+  color: var(--danger);
+}
+
+.addButtons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.divider {
+  width: 1px;
+  background: var(--panel-border);
+}
+
+.legsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.legsEmpty {
+  color: var(--muted);
+}
+
+.legCard {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 8px;
+  align-items: center;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.deleteButton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.deleteButton button {
+  color: var(--danger);
+}
+
+.metricsGrid {
+  margin-top: 12px;
+}

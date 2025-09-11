@@ -1,6 +1,7 @@
 import ReactECharts from 'echarts-for-react'
 import type { Strategy } from '../lib/types'
 import { buildPriceRange, computePayoffCurve } from '../lib/payoff'
+import styles from './SingleLegsChart.module.scss';
 
 export default function SingleLegsChart({ strategy }: { strategy: Strategy }) {
   const prices = buildPriceRange(strategy.referencePrice, 0.3, 201)
@@ -22,7 +23,7 @@ export default function SingleLegsChart({ strategy }: { strategy: Strategy }) {
     series
   }
 
-  return <ReactECharts option={option} style={{ height: 300 }} />
+  return <ReactECharts option={option} className={styles.chart} />
 }
 
 

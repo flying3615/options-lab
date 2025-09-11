@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import styles from './Box.module.scss';
 
 export default function Box() {
   return (
     <section>
       <h1>箱形价差 / 转换（Box Spread / Conversion）</h1>
-      <p style={{ color: 'var(--muted)' }}>
+      <p className={styles.muted}>
         由看涨/看跌价差组合而成，到期价值理论上等于两执行价差距（忽略成本与资金利率）。常见于锁定价差或做套利的专业应用。
       </p>
 
@@ -42,7 +43,7 @@ export default function Box() {
         </ul>
       </div>
 
-      <div style={{ marginTop: 12, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+      <div className={styles.flexLinks}>
         <Link to="/strategies"><button>返回策略库</button></Link>
         <Link to="/"><button>返回首页</button></Link>
       </div>
