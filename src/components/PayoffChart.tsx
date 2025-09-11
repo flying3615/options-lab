@@ -11,7 +11,21 @@ export default function PayoffChart({ strategy }: Props) {
   const { curve, breakEvens } = computeMetrics(strategy, prices)
 
   const option = {
-    tooltip: { trigger: 'axis' },
+    tooltip: {
+      trigger: 'axis',
+      formatter: (params) => {
+        const point = params[0];
+        const price = point.value[0].toFixed(2);
+        const pnl = point.value[1].toFixed(2);
+        const color = pnl >= 0 ? '#22c55e' : '#ef4444';
+        return `
+          <div style="font-size: 12px;">
+            <div>股价: <strong>${price}</strong></div>
+            <div>盈亏: <strong style="color: ${color};">${pnl}</strong></div>
+          </div>
+        `;
+      }
+    },
     grid: { left: 40, right: 20, top: 30, bottom: 40 },
     xAxis: { type: 'value', name: '标的价格', axisLine: { lineStyle: { color: '#94a3b8' } }, axisLabel: { color: '#334155' }, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } },
     yAxis: { type: 'value', name: '到期盈亏', axisLine: { lineStyle: { color: '#94a3b8' } }, axisLabel: { color: '#334155' }, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } },

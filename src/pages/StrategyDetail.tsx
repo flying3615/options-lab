@@ -82,7 +82,7 @@ export default function StrategyDetail() {
           {s.example && (
             <div>
               <h2>举例</h2>
-              <p><strong>{s.example}</strong></p>
+              {s.example}
             </div>
           )}
         </div>

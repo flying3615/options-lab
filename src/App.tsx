@@ -11,6 +11,7 @@ import Premium from './pages/Premium'
 import Calendar from './pages/Calendar'
 import Builder from './pages/Builder'
 import Box from './pages/Box'
+import Wizard from './pages/Wizard'
 
 function App() {
   return (
@@ -24,7 +25,13 @@ function App() {
             <NavLink to="/" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>首页</NavLink>
           </li>
           <li>
+            <NavLink to="/basics" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>新手入门</NavLink>
+          </li>
+          <li>
             <NavLink to="/strategies" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>策略库</NavLink>
+          </li>
+          <li>
+            <NavLink to="/wizard" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>✨ 策略向导</NavLink>
           </li>
           <li>
             <NavLink to="/builder" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>构建</NavLink>
@@ -46,6 +53,7 @@ function App() {
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/strategies" element={<Strategies />} />
           <Route path="/strategies/:id" element={<StrategyDetail />} />
+          <Route path="/wizard" element={<Wizard />} />
           <Route path="/compare" element={<Compare />} />
           <Route path="/builder" element={<Builder />} />
           <Route path="/box" element={<Box />} />

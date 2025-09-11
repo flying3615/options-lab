@@ -1,115 +1,74 @@
 import { Link } from 'react-router-dom'
+import GlossaryTooltip from '../components/GlossaryTooltip'
 
 export default function Basics() {
   return (
     <section>
-      <h1>期权基础</h1>
+      <h1>欢迎来到期权的世界！</h1>
       <p style={{ color: 'var(--muted)' }}>
-        从“什么是期权”与常见术语出发，形成对期权定价要素与风险/收益结构的直觉认识。
+        别担心，期权没有那么复杂。在这里，我们将从最基础的概念出发，带你一步步揭开它的面纱。
       </p>
 
-      <h2>什么是期权</h2>
+      <h2>第一步：理解核心概念</h2>
       <div className="card">
+        <h3>什么是期权？</h3>
+        <p>
+          你可以把
+          <GlossaryTooltip term="期权 (Option)">期权</GlossaryTooltip>
+          想象成一张“优惠券”。这张优惠券给你在未来某个特定时间（
+          <GlossaryTooltip term="到期日 (Expiration Date)">到期日</GlossaryTooltip>
+          ），以一个特定价格（
+          <GlossaryTooltip term="执行价 (Strike Price)">执行价</GlossaryTooltip>
+          ），买入或卖出某样东西（比如股票）的“权利”，但不是“义务”。
+        </p>
         <ul>
-          <li>期权是一种“权利”，到期前（或到期时）按约定价格买入/卖出标的。</li>
-          <li>看涨（Call）：看多上行；看跌（Put）：看空下行或作为下方保险。</li>
-          <li>买方支付权利金，最大亏损为保费；卖方收取权利金，承担相应义务与风险。</li>
-          <li>一张合约常对应 100 股（合约乘数 100）。</li>
+          <li>
+            <strong><GlossaryTooltip term="看涨期权 (Call)">看涨期权 (Call)</GlossaryTooltip></strong>
+            ：一张允许你“买入”的优惠券，当你认为价格会涨的时候使用。
+          </li>
+          <li>
+            <strong><GlossaryTooltip term="看跌期权 (Put)">看跌期权 (Put)</GlossaryTooltip></strong>
+            ：一张允许你“卖出”的优惠券，当你认为价格会跌的时候使用。
+          </li>
         </ul>
+        <p>就像优惠券有有效期一样，期权也有。理解这一点，你就已经掌握了期权最核心的秘密！</p>
       </div>
 
-      <h2>基本术语</h2>
+      <h2>第二步：从四个基础策略开始</h2>
+      <p>所有复杂的期权策略，都是由四个基础操作演变而来的。我们为你准备了详细的入门解读：</p>
       <div className="grid">
         <div className="card">
-          <h3>执行价（Strike）与到期（Expiry）</h3>
-          <ul>
-            <li>执行价：行权所用的价格（K）。</li>
-            <li>到期：合约失效时间，越近时间价值衰减越快。</li>
-          </ul>
+          <h3><Link to={"/strategies/long-call"}>买入看涨期权 (Long Call)</Link></h3>
+          <p>
+            这是最纯粹的看涨方式。如果你坚信一支股票会大涨，这是一个用较小成本（
+            <GlossaryTooltip term="权利金 (Premium)">权利金</GlossaryTooltip>
+            ）博取巨大收益的理想工具。风险可控，收益无限。
+          </p>
+          <p><Link to={"/strategies/long-call"} className="button">学习 Long Call策略 &rarr;</Link></p>
         </div>
         <div className="card">
-          <h3>内在/时间价值</h3>
-          <ul>
-            <li>内在价值（Intrinsic）：对买方“立刻行权”的价值。</li>
-            <li>时间价值：权利金减去内在价值的部分，随时间流逝（Theta）衰减。</li>
-          </ul>
+          <h3><Link to={"/strategies/long-put"}>买入看跌期权 (Long Put)</Link></h3>
+          <p>最纯粹的看跌或保护方式。如果你认为一支股票会大跌，或者想为你的持仓买一份“保险”，它能帮你从价格下跌中获利。 </p>
+          <p><Link to={"/strategies/long-put"} className="button">学习 Long Put策略 &rarr;</Link></p>
         </div>
         <div className="card">
-          <h3>多头/空头（Long/Short）</h3>
-          <ul>
-            <li>Long：买入权利，支付保费，风险有限。</li>
-            <li>Short：卖出权利，收取保费，承担义务与潜在较大风险。</li>
-          </ul>
+          <h3><Link to={"/strategies/covered-call"}>备兑看涨期权 (Covered Call)</Link></h3>
+          <p>如果你手里有股票，并觉得它短期内不会大涨，可以试试这个策略。它就像把股票“租”出去，帮你持续创造额外收入。</p>
+          <p><Link to={"/strategies/covered-call"} className="button">学习 Covered Call策略 &rarr;</Link></p>
         </div>
         <div className="card">
-          <h3>合约乘数与名义金额</h3>
-          <ul>
-            <li>多数股票期权乘数为 100，名义金额 = 价格 × 乘数 × 张数。</li>
-            <li>报价常为“每股”的权利金，结算需乘以乘数与张数。</li>
-          </ul>
+          <h3><Link to={"/strategies/protective-put"}>保护性看跌期权 (Protective Put)</Link></h3>
+          <p>担心你持有的股票会突然下跌？这个策略就是为你量身定做的“资产保险”，它能在不放弃未来上涨潜力的前提下，保护你的资产。</p>
+          <p><Link to={"/strategies/protective-put"} className="button">学习 Protective Put策略 &rarr;</Link></p>
         </div>
       </div>
 
-      <h2>四种基本单腿（到期维度）</h2>
-      <div className="card" style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          <thead>
-            <tr>
-              <th style={{ textAlign: 'left', padding: 8, borderBottom: '1px solid var(--panel-border)' }}>策略</th>
-              <th style={{ textAlign: 'left', padding: 8, borderBottom: '1px solid var(--panel-border)' }}>方向/暴露</th>
-              <th style={{ textAlign: 'left', padding: 8, borderBottom: '1px solid var(--panel-border)' }}>现金流（开仓）</th>
-              <th style={{ textAlign: 'left', padding: 8, borderBottom: '1px solid var(--panel-border)' }}>最大盈利</th>
-              <th style={{ textAlign: 'left', padding: 8, borderBottom: '1px solid var(--panel-border)' }}>最大亏损</th>
-              <th style={{ textAlign: 'left', padding: 8, borderBottom: '1px solid var(--panel-border)' }}>盈亏平衡点（到期）</th>
-              <th style={{ textAlign: 'left', padding: 8, borderBottom: '1px solid var(--panel-border)' }}>直觉</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}><strong>买入看涨（Long Call）</strong></td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>看多上行、正 Vega、负 Theta</td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>支付保费</td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>理论无限</td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>保费（有限）</td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>执行价 + 保费/股</td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>用有限成本参与上涨；需足够上行覆盖保费</td>
-            </tr>
-            <tr>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}><strong>卖出看涨（Short Call）</strong></td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>看空/中性、负 Vega、正 Theta</td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>收取保费</td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>保费（有限）</td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>理论无限</td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>执行价 + 保费/股</td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>赚时间价值但承受上行无限风险（裸卖风险高）</td>
-            </tr>
-            <tr>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}><strong>买入看跌（Long Put）</strong></td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>看空/保护、正 Vega、负 Theta</td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>支付保费</td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>趋近于执行价 − 保费（到 0 时）</td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>保费（有限）</td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>执行价 − 保费/股</td>
-              <td style={{ padding: 8, borderBottom: '1px solid var(--panel-border)' }}>为下跌买保险；大跌收益可观，上涨损失保费</td>
-            </tr>
-            <tr>
-              <td style={{ padding: 8 }}><strong>卖出看跌（Short Put）</strong></td>
-              <td style={{ padding: 8 }}>看多/中性、负 Vega、正 Theta</td>
-              <td style={{ padding: 8 }}>收取保费</td>
-              <td style={{ padding: 8 }}>保费（有限）</td>
-              <td style={{ padding: 8 }}>执行价 − 0 − 保费（至 0 的下行，有限）</td>
-              <td style={{ padding: 8 }}>执行价 − 保费/股</td>
-              <td style={{ padding: 8 }}>用承担下行风险换取现金流；可能被指派买入标的</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h2>继续学习</h2>
+      <h2>第三步：探索更多</h2>
+      <p>当你掌握了这四个基础后，就可以开始探索更广阔的期权世界了。</p>
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 8 }}>
-        <Link to="/"><button>返回首页</button></Link>
         <Link to="/strategies"><button>进入策略库</button></Link>
-        <Link to="/compare"><button>策略对比</button></Link>
+        <Link to="/compare"><button>对比不同策略</button></Link>
+        <Link to="/builder"><button>自由构建你的策略</button></Link>
       </div>
     </section>
   )
