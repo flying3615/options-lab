@@ -3,61 +3,41 @@ import styles from './Home.module.scss';
 
 export default function Home() {
   return (
-    <section>
-      <h1>期权策略演示</h1>
-      <p>聚焦组合策略的讲解与可视化演示。进入策略库以浏览常见模板与到期盈亏图，或在对比页叠加观察形状差异。</p>
-
-      <div className={styles.flexButtons}>
-        <Link to="/strategies"><button>进入策略库</button></Link>
-        <Link to="/compare"><button>策略对比</button></Link>
-      </div>
-
-      <h2>期权基础</h2>
-      <div className="grid">
-        <Link to="/basics" className={styles.linkNoDec}>
-          <div className={`card ${styles.cardPointer}`}>
-            <h3>期权基础入门</h3>
-            <p className={styles.mutedSmall}>
-              点击进入：什么是期权、基本术语、定价要素与直觉。
-            </p>
-          </div>
+    <div className={styles.container}>
+      <div className={styles.hero}>
+        <h1 className={styles.heroTitle}>期权策略实验室</h1>
+        <p className={styles.heroSubtitle}>一个用于学习、比较和构建期权策略的可视化工具</p>
+        <Link to="/strategies" className={styles.ctaButton}>
+          探索策略库
         </Link>
       </div>
 
+      <main className={styles.main}>
+        <div className={styles.card}>
+          <Link to="/compare">
+            <h2>策略比较 &rarr;</h2>
+            <p>并排比较不同策略，找到最适合市场预期的那一个。</p>
+          </Link>
+        </div>
 
+        <div className={styles.card}>
+          <Link to="/builder">
+            <h2>策略构建器 &rarr;</h2>
+            <p>从零开始，或基于现有策略，构建你自己的期权组合。</p>
+          </Link>
+        </div>
 
-      <h2>希腊字母速览（直觉版）</h2>
-      <div className="grid">
-        <div className="card">
-          <h3>Delta（方向敏感度）</h3>
-          <p>标的价格每变动 1 单位，期权价格平均变动多少。看涨 Delta 为正、看跌为负；接近平值时变化最快。</p>
-          <p className={styles.greekExplanation}>直觉：Delta 越大，越“像持有标的”。</p>
+        <div className={styles.card}>
+          <Link to="/basics">
+            <h2>基础知识 &rarr;</h2>
+            <p>学习期权交易的核心概念，为深入学习打下坚实基础。</p>
+          </Link>
         </div>
-        <div className="card">
-          <h3>Gamma（Delta 的变化率）</h3>
-          <p>标的再变动一点点，Delta 会增加/减少多少。平值附近 Gamma 最大，远实值/虚值较小。</p>
-          <p className={styles.greekExplanation}>直觉：Gamma 决定曲线的“弯曲程度”。</p>
-        </div>
-        <div className="card">
-          <h3>Theta（时间价值衰减）</h3>
-          <p>在其他不变时，每过 1 天期权价格期望减少多少。买方通常 Theta 为负、卖方为正。</p>
-          <p className={styles.greekExplanation}>直觉：时间就是成本，越接近到期衰减越快。</p>
-        </div>
-        <div className="card">
-          <h3>Vega（对隐含波动率的敏感度）</h3>
-          <p>隐含波动率每上升 1%，期权价格期望变化多少。买波动（Long Vega）受益于波动率上升。</p>
-          <p className={styles.greekExplanation}>直觉：波动率越高，“彩票越贵”。</p>
-        </div>
-        <div className="card">
-          <h3>Rho（对利率的敏感度）</h3>
-          <p>利率每上升 1%，期权价格期望变化多少。通常利率上升有利于看涨、相对不利于看跌。</p>
-          <p className={styles.greekExplanation}>直觉：资金成本的变化对期权有边际影响。</p>
-        </div>
-      </div>
+      </main>
 
-      <p className={styles.note}>
-        注：本网站的可视化目前聚焦“到期盈亏”示意（忽略时间价值的动态变化），用于直观看形状与风险边界。
-      </p>
-    </section>
-  )
+      <footer className={styles.footer}>
+        <Link to="/disclaimer">免责声明</Link>
+      </footer>
+    </div>
+  );
 }
