@@ -38,7 +38,7 @@ export default function Strategies() {
     if (groupingMode === 'outlook') {
       for (const s of strategies) {
         const g = classifyByOutlook(s.name, s.tags)
-        if (!map.has(g)) map.set(g, [] as any)
+        if (!map.has(g)) map.set(g, [])
         map.get(g)!.push(s)
       }
       const order: Array<'看多' | '看空' | '中性'> = ['看多', '看空', '中性']
@@ -49,7 +49,7 @@ export default function Strategies() {
     } else {
       for (const s of strategies) {
         const g = classifyByDifficulty(s)
-        if (!map.has(g)) map.set(g, [] as any)
+        if (!map.has(g)) map.set(g, [])
         map.get(g)!.push(s)
       }
       const order: Array<'新手入门' | '中级策略' | '高级策略'> = ['新手入门', '中级策略', '高级策略']
@@ -64,7 +64,7 @@ export default function Strategies() {
   const userStrategiesGroup = useMemo<Group | null>(() => {
     const mine = loadUserStrategies()
     if (mine.length) {
-      return { name: '我的策略', items: mine as any }
+      return { name: '我的策略', items: mine }
     }
     return null
   }, [])

@@ -27,7 +27,7 @@ export const appStore = createStore<AppState>((set, get) => ({
   ...initialState,
 
   setCompare: (index, id) => {
-    const next: [string | null, string | null] = [...get().selectedCompareIds] as any
+    const next: [string | null, string | null] = [...get().selectedCompareIds]
     next[index] = id
     set({ selectedCompareIds: next })
   },
