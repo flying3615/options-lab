@@ -54,7 +54,7 @@ section > h3 { font-size: 16px; margin: 16px 0 8px; }
 /* Detail page layout */
 .detail-layout {
   display: grid;
-  grid-template-columns: 1fr 380px;
+  grid-template-columns: 6fr 4fr;
   gap: 24px;
 }
 
