@@ -19,5 +19,3 @@ export default function MiniPayoff({ strategy }: { strategy: Strategy }) {
   }
   return <ReactECharts option={option} style={{ height: 80 }} />
 }
-
-

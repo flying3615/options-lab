@@ -1,4 +1,3 @@
-import React from 'react';
 import type { Strategy } from '../../../lib/types';
 
 const strategy: Strategy = {
@@ -41,4 +40,3 @@ const strategy: Strategy = {
 };
 
 export default strategy;
-
