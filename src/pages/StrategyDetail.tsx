@@ -7,6 +7,8 @@ import SingleLegsChart from '../components/SingleLegsChart'
 import MetricsPanel from '../components/MetricsPanel'
 import LegEditor from '../components/LegEditor'
 
+
+// 重构 StrategyDetail.tsx： 创建一个名为 detail-layout 的外层容器。 在该容器内，创建左右两个子容器：main-content 和 sidebar。 左侧 main-content 将包含：到期盈亏图、指标面板、参数编辑器、单腿分解图和叠加步骤图。 右侧 sidebar 将包含：策略名称、标签、描述、组成腿、概念、示例、优缺点、风险提示等所有文字说明内容。 更新 App.css： 我会添加新的CSS规则来支持这个 detail-layout 布局，确保左右分栏能正确显示。
 export default function StrategyDetail() {
   const { id } = useParams()
   const strategy = useMemo(() => (id ? findStrategy(id) : undefined), [id])
