@@ -1,0 +1,25 @@
+.editHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.editTitle {
+  margin: 0;
+}
+
+.tagMargin {
+  margin-right: 8px;
+}
+
+.contentSection {
+  margin-top: 16px;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}

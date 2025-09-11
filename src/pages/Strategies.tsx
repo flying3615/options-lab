@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { strategies } from '../data/strategies'
 import StrategyCard from '../components/StrategyCard'
 import { loadUserStrategies } from '../lib/userStrategies'
+import styles from './Strategies.module.scss';
 
 type Group = { name: string; items: typeof strategies }
 type GroupingMode = 'outlook' | 'difficulty'
@@ -15,13 +16,17 @@ function classifyByOutlook(name: string, tags?: string[]): '看多' | '看空' |
   return '中性'
 }
 
-/** 按难度分组 */
-function classifyByDifficulty(tags?: string[]): '新手入门' | '中级策略' | '高级策略' {
-  const text = (tags ?? []).join(' ')
-  const has = (kw: string) => text.includes(kw)
-  if (has('新手入门')) return '新手入门'
-  if (has('高级')) return '高级策略'
-  return '中级策略'
+/** 按策略内在复杂度（期权腿数量）进行分组 */
+function classifyByDifficulty(s: { id: string; legs: any[] }): '新手入门' | '中级策略' | '高级策略' {
+  // 特例：某些策略虽然腿数不多，但概念上属于高级
+  if (s.id === 'box-spread' || s.id === 'calendar-spread') {
+    return '高级策略'
+  }
+
+  const legs = s.legs?.length ?? 0
+  if (legs <= 1) return '新手入门'
+  if (legs === 2) return '中级策略'
+  return '高级策略'
 }
 
 export default function Strategies() {
@@ -43,7 +48,7 @@ export default function Strategies() {
       return out
     } else {
       for (const s of strategies) {
-        const g = classifyByDifficulty(s.tags)
+        const g = classifyByDifficulty(s)
         if (!map.has(g)) map.set(g, [] as any)
         map.get(g)!.push(s)
       }
@@ -67,18 +72,16 @@ export default function Strategies() {
   return (
     <section>
       <h1>策略库</h1>
-      <p style={{ margin: '8px 0 16px', color: '#667085', fontSize: 13 }}>
-        说明：本页所有策略示例均以标的当前价格 100 元为基准（S0=100），用于统一展示与对比。
-      </p>
+      <p className={styles.description}>浏览我们精心挑选和分类的多种期权策略，或创建并保存您自己的策略。</p>
 
-      <div className="tabs" style={{ marginBottom: 16 }}>
+      <div className={`tabs ${styles.tabs}`}>
         <button className={groupingMode === 'outlook' ? 'active' : ''} onClick={() => setGroupingMode('outlook')}>按方向分组</button>
         <button className={groupingMode === 'difficulty' ? 'active' : ''} onClick={() => setGroupingMode('difficulty')}>按难度分组</button>
       </div>
 
       {userStrategiesGroup && (
-        <div style={{ marginBottom: 16 }}>
-          <h2 style={{ marginTop: 8 }}>{userStrategiesGroup.name}</h2>
+        <div className={styles.userGroupContainer}>
+          <h2 className={styles.groupHeader}>{userStrategiesGroup.name}</h2>
           <div className="grid">
             {userStrategiesGroup.items.map((s) => (
               <StrategyCard key={s.id} s={s} />
@@ -88,8 +91,8 @@ export default function Strategies() {
       )}
 
       {groups.map((g) => (
-        <div key={g.name} style={{ marginBottom: 16 }}>
-          <h2 style={{ marginTop: 8 }}>{g.name}</h2>
+        <div key={g.name} className={styles.groupContainer}>
+          <h2 className={styles.groupHeader}>{g.name}</h2>
           <div className="grid">
             {g.items.map((s) => (
               <StrategyCard key={s.id} s={s} />

@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
 import type { Strategy, Leg } from '../lib/types'
+import styles from './LegEditor.module.scss';
 
 function toNumber(v: string, fallback = 0) {
   const n = parseFloat(v)
@@ -18,16 +19,16 @@ export default function LegEditor({ strategy, onChange }: Props) {
   }, [strategy, onChange])
 
   return (
-    <div className="card" style={{ padding: 12 }}>
-      <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 8 }}>
+    <div className={`card ${styles.card}`}>
+      <div className={styles.note}>
         本页临时调整（不保存，刷新后恢复示例）。可编辑数量、执行价与权利金/成本。
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <div className={styles.legsContainer}>
         {strategy.legs.map((leg, i) => (
-          <div key={leg.id} style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', border: '1px dashed var(--border)', padding: 8, borderRadius: 6 }}>
+          <div key={leg.id} className={styles.legRow}>
             <span className="tag">{leg.kind === 'stock' ? '股票' : `${leg.option?.type.toUpperCase()} 期权`}</span>
             <span className="tag">{leg.position}</span>
-            <label style={{ display: 'flex', alignItems: 'center', gap: 4, whiteSpace: 'nowrap' }}>
+            <label className={styles.label}>
               数量
               <input
                 type="number"
@@ -37,11 +38,11 @@ export default function LegEditor({ strategy, onChange }: Props) {
                 onChange={(e) =>
                   updateLegAt(i, (l) => ({ ...l, qty: Math.max(0, Math.round(toNumber(e.target.value, l.qty))) }))
                 }
-                style={{ width: 80 }}
+                className={styles.qtyInput}
               />
             </label>
             {leg.kind === 'option' && (
-              <label style={{ display: 'flex', alignItems: 'center', gap: 4, whiteSpace: 'nowrap' }}>
+              <label className={styles.label}>
                 执行价
                 <input
                   type="number"
@@ -54,11 +55,11 @@ export default function LegEditor({ strategy, onChange }: Props) {
                         : l
                     )
                   }
-                  style={{ width: 100 }}
+                  className={styles.strikeInput}
                 />
               </label>
             )}
-            <label style={{ display: 'flex', alignItems: 'center', gap: 4, whiteSpace: 'nowrap' }}>
+            <label className={styles.label}>
               {leg.kind === 'stock' ? '成本' : '权利金'}
               <input
                 type="number"
@@ -67,7 +68,7 @@ export default function LegEditor({ strategy, onChange }: Props) {
                 onChange={(e) =>
                   updateLegAt(i, (l) => ({ ...l, entryPrice: toNumber(e.target.value, l.entryPrice ?? 0) }))
                 }
-                style={{ width: 100 }}
+                className={styles.premiumInput}
               />
             </label>
           </div>

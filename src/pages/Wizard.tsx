@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import styles from './Wizard.module.scss';
 
 type Outlook = '大涨' | '温和上涨' | '盘整' | '温和下跌' | '大跌';
 type RiskTolerance = '低' | '中' | '高';
@@ -95,18 +96,18 @@ export default function Wizard() {
   return (
     <section>
       <h1>策略推荐向导</h1>
-      <p style={{ color: 'var(--muted)' }}>回答两个简单问题，我们将为您推荐一个适合您当前想法的入门策略。</p>
+      <p className={styles.muted}>回答两个简单问题，我们将为您推荐一个适合您当前想法的入门策略。</p>
 
-      <div className="card" style={{ marginTop: 24 }}>
+      <div className={`card ${styles.cardMargin}`}>
         {step === 1 && (
           <div>
             <h3>第一步：您对市场的看法是？</h3>
-            <div className="grid">
-              <button onClick={() => handleOutlookSelect('大涨')}>🚀 大幅上涨</button>
-              <button onClick={() => handleOutlookSelect('温和上涨')}>📈 温和上涨</button>
-              <button onClick={() => handleOutlookSelect('盘整')}>횡 盘整/区间震荡</button>
-              <button onClick={() => handleOutlookSelect('温和下跌')}>📉 温和下跌</button>
-              <button onClick={() => handleOutlookSelect('大跌')}>💣 大幅下跌</button>
+            <div className={styles.choiceGrid}>
+              <div className={styles.choiceCard} onClick={() => handleOutlookSelect('大涨')}>🚀 大幅上涨</div>
+              <div className={styles.choiceCard} onClick={() => handleOutlookSelect('温和上涨')}>📈 温和上涨</div>
+              <div className={styles.choiceCard} onClick={() => handleOutlookSelect('盘整')}>↔️ 盘整/区间震荡</div>
+              <div className={styles.choiceCard} onClick={() => handleOutlookSelect('温和下跌')}>📉 温和下跌</div>
+              <div className={styles.choiceCard} onClick={() => handleOutlookSelect('大跌')}>💣 大幅下跌</div>
             </div>
           </div>
         )}
@@ -114,22 +115,22 @@ export default function Wizard() {
         {step === 2 && (
           <div>
             <h3>第二步：您的风险承受能力是？</h3>
-            <p style={{ fontSize: 12, color: 'var(--muted)' }}>您选择的看法是：<strong>{outlook}</strong></p>
-            <div className="grid">
-              <button onClick={() => handleRiskSelect('低')}>🟢 低</button>
-              <button onClick={() => handleRiskSelect('中')}>🟡 中</button>
-              <button onClick={() => handleRiskSelect('高')}>🔴 高</button>
+            <p className={styles.smallMuted}>您选择的看法是：<strong>{outlook}</strong></p>
+            <div className={styles.choiceGrid}>
+              <div className={styles.choiceCard} onClick={() => handleRiskSelect('低')}>🟢 低</div>
+              <div className={styles.choiceCard} onClick={() => handleRiskSelect('中')}>🟡 中</div>
+              <div className={styles.choiceCard} onClick={() => handleRiskSelect('高')}>🔴 高</div>
             </div>
-            <button onClick={reset} style={{ marginTop: 16, background: 'transparent', border: 'none' }}>&larr; 返回上一步</button>
+            <button onClick={reset} className={styles.resetButton}>&larr; 返回上一步</button>
           </div>
         )}
 
         {step === 3 && suggestion && (
-          <div>
+          <div className={styles.suggestionBox}>
             <h3>我们为您推荐：</h3>
             <h2><Link to={`/strategies/${suggestion.id}`}>{suggestion.name}</Link></h2>
             <p>{suggestion.reason}</p>
-            <div style={{ display: 'flex', gap: 16, marginTop: 24 }}>
+            <div className={styles.flexButtons}>
               <Link to={`/strategies/${suggestion.id}`} className="button">查看策略详情</Link>
               <button onClick={reset}>重新测试</button>
             </div>

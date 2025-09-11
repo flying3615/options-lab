@@ -6,8 +6,6 @@ import StrategyDetail from './pages/StrategyDetail'
 import Compare from './pages/Compare'
 import Disclaimer from './pages/Disclaimer'
 import Basics from './pages/Basics'
-import Volatility from './pages/Volatility'
-import Premium from './pages/Premium'
 import Calendar from './pages/Calendar'
 import Builder from './pages/Builder'
 import Box from './pages/Box'
@@ -40,7 +38,7 @@ function App() {
             <NavLink to="/compare" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>⚖️ 对比</NavLink>
           </li>
           <li>
-            <NavLink to="/disclaimer" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>⚖️ 声明</NavLink>
+            <NavLink to="/disclaimer" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}> 声明</NavLink>
           </li>
         </ul>
       </nav>
@@ -48,8 +46,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/basics" element={<Basics />} />
-          <Route path="/volatility" element={<Volatility />} />
-          <Route path="/premium" element={<Premium />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/strategies" element={<Strategies />} />
           <Route path="/strategies/:id" element={<StrategyDetail />} />

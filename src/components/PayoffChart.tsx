@@ -1,6 +1,7 @@
 import ReactECharts from 'echarts-for-react'
 import type { Strategy } from '../lib/types'
 import { buildPriceRange, computeMetrics } from '../lib/payoff'
+import styles from './PayoffChart.module.scss';
 
 interface Props {
   strategy: Strategy
@@ -13,7 +14,7 @@ export default function PayoffChart({ strategy }: Props) {
   const option = {
     tooltip: {
       trigger: 'axis',
-      formatter: (params) => {
+      formatter: function(params: any) {
         const point = params[0];
         const price = point.value[0].toFixed(2);
         const pnl = point.value[1].toFixed(2);
@@ -53,7 +54,7 @@ export default function PayoffChart({ strategy }: Props) {
     ]
   }
 
-  return <ReactECharts option={option} style={{ height: 360 }} />
+  return <ReactECharts option={option} className={styles.chart} />
 }
 
 

@@ -6,6 +6,7 @@ import CompositionSteps from '../components/CompositionSteps'
 import SingleLegsChart from '../components/SingleLegsChart'
 import MetricsPanel from '../components/MetricsPanel'
 import LegEditor from '../components/LegEditor'
+import styles from './StrategyDetail.module.scss';
 
 export default function StrategyDetail() {
   const { id } = useParams()
@@ -31,8 +32,8 @@ export default function StrategyDetail() {
 
         <MetricsPanel strategy={s} />
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12 }}>
-          <h2 style={{ margin: 0 }}>即时编辑（临时）</h2>
+        <div className={styles.editHeader}>
+          <h2 className={styles.editTitle}>即时编辑（临时）</h2>
           <div>
             <button onClick={() => setDraft(strategy!)} disabled={!strategy}>重置示例</button>
           </div>
@@ -52,7 +53,7 @@ export default function StrategyDetail() {
         {s.tags && (
           <p>
             {s.tags.map((t) => (
-              <span key={t} className="tag" style={{ marginRight: 8 }}>{t}</span>
+              <span key={t} className={`tag ${styles.tagMargin}`}>{t}</span>
             ))}
           </p>
         )}
@@ -75,7 +76,7 @@ export default function StrategyDetail() {
         </ul>
 
         {(s.concept || s.formula || s.example) && (
-          <div style={{ marginTop: 16 }}>
+          <div className={styles.contentSection}>
             {s.concept && (
               <div>
                 <h2>概念易懂版</h2>
@@ -111,7 +112,7 @@ export default function StrategyDetail() {
           </div>
         )}
 
-        <div className="info-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 12 }}>
+        <div className={`info-grid ${styles.infoGrid}`}>
           {s.suitableFor && (
             <div>
               <h3>适用场景</h3>

@@ -1,0 +1,24 @@
+.controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.stepInfo {
+  margin-left: 8px;
+}
+
+.modeButton {
+  border-color: var(--primary);
+}
+
+.note {
+  margin-top: 0;
+  color: var(--muted);
+}
+
+.chart {
+  height: 300px;
+}

@@ -5,6 +5,7 @@ import MultiPayoffChart from '../components/MultiPayoffChart'
 import MetricsPanel from '../components/MetricsPanel'
 import { useCompareIds, useInitFromSearch, useSetCompare, useSwapCompare } from '../lib/store'
 import { updateCompareInUrl } from '../lib/url'
+import styles from './Compare.module.scss';
 
 export default function Compare() {
   const initFromSearch = useInitFromSearch()
@@ -78,7 +79,7 @@ export default function Compare() {
 
       <MultiPayoffChart strategies={selected} />
 
-      <div className="metrics-grid" style={{ marginTop: 12 }}>
+      <div className={`metrics-grid ${styles.metricsGrid}`}>
         {a && <MetricsPanel strategy={a} title="A：关键指标" />}
         {b && <MetricsPanel strategy={b} title="B：关键指标" />}
       </div>
