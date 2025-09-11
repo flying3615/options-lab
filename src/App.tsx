@@ -22,25 +22,25 @@ function App() {
         </Link>
         <ul className="menu">
           <li>
-            <NavLink to="/" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>首页</NavLink>
+            <NavLink to="/" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>🏠 首页</NavLink>
           </li>
           <li>
-            <NavLink to="/basics" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>新手入门</NavLink>
+            <NavLink to="/basics" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>🎓 新手入门</NavLink>
           </li>
           <li>
-            <NavLink to="/strategies" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>策略库</NavLink>
+            <NavLink to="/strategies" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>📚 策略库</NavLink>
           </li>
           <li>
             <NavLink to="/wizard" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>✨ 策略向导</NavLink>
           </li>
           <li>
-            <NavLink to="/builder" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>构建</NavLink>
+            <NavLink to="/builder" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>🛠️ 构建</NavLink>
           </li>
           <li>
-            <NavLink to="/compare" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>对比</NavLink>
+            <NavLink to="/compare" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>⚖️ 对比</NavLink>
           </li>
           <li>
-            <NavLink to="/disclaimer" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>声明</NavLink>
+            <NavLink to="/disclaimer" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>⚖️ 声明</NavLink>
           </li>
         </ul>
       </nav>
