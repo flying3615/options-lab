@@ -1,11 +1,11 @@
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import type { Strategy } from '../lib/types'
 import MiniPayoff from './MiniPayoff'
 
 export default function StrategyCard({ s }: { s: Strategy }) {
-  const navigate = useNavigate()
+  const router = useRouter()
   const target = s.knowledgeOnly && s.linkTo ? s.linkTo : `/strategies/${s.id}`
-  const goto = () => navigate(target)
+  const goto = () => router.push(target)
 
   return (
     <div

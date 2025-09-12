@@ -35,7 +35,7 @@ function genId(): string {
 export function upsertUserStrategy(s: Strategy): Strategy {
   const list = loadUserStrategies()
   let idx = list.findIndex((x) => x.id === s.id)
-  let next: Strategy = { ...s }
+  const next: Strategy = { ...s }
   if (!s.id || s.id.startsWith('user-temp')) {
     next.id = genId()
     idx = -1

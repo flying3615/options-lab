@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import ReactECharts from 'echarts-for-react'
-import { buildPriceRange } from '../lib/payoff'
+import { buildPriceRange } from '../src/lib/payoff'
 import styles from './Calendar.module.scss';
 
 type OptType = 'call' | 'put'
@@ -178,9 +178,9 @@ export default function Calendar() {
         <div className="card">
           <h3>继续学习</h3>
           <div className={styles.flexLinks}>
-            <Link to="/volatility"><button>隐含波动率</button></Link>
-            <Link to="/premium"><button>溢价与溢价率</button></Link>
-            <Link to="/strategies"><button>策略库</button></Link>
+            <Link href="/volatility"><button>隐含波动率</button></Link>
+            <Link href="/premium"><button>溢价与溢价率</button></Link>
+            <Link href="/strategies"><button>策略库</button></Link>
           </div>
         </div>
       </div>

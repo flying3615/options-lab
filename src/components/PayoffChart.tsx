@@ -14,11 +14,12 @@ export default function PayoffChart({ strategy }: Props) {
   const option = {
     tooltip: {
       trigger: 'axis',
-      formatter: function(params: any) {
+      formatter: function(params: { value: [number, number] }[]) {
         const point = params[0];
         const price = point.value[0].toFixed(2);
-        const pnl = point.value[1].toFixed(2);
-        const color = pnl >= 0 ? '#22c55e' : '#ef4444';
+        const pnlValue = point.value[1];
+        const color = pnlValue >= 0 ? '#22c55e' : '#ef4444';
+        const pnl = pnlValue.toFixed(2);
         return `
           <div style="font-size: 12px;">
             <div>股价: <strong>${price}</strong></div>

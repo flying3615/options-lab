@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import type { Strategy, Leg, LegKind, Position, OptionType } from '../lib/types'
-import PayoffChart from '../components/PayoffChart'
-import SingleLegsChart from '../components/SingleLegsChart'
-import MetricsPanel from '../components/MetricsPanel'
-import { upsertUserStrategy, loadUserStrategies, removeUserStrategy } from '../lib/userStrategies'
+import type { Strategy, Leg, LegKind, Position, OptionType } from '../src/lib/types'
+import PayoffChart from '../src/components/PayoffChart'
+import SingleLegsChart from '../src/components/SingleLegsChart'
+import MetricsPanel from '../src/components/MetricsPanel'
+import { upsertUserStrategy, loadUserStrategies, removeUserStrategy } from '../src/lib/userStrategies'
 import styles from './Builder.module.scss';
 
 function genLegId(prefix = 'leg'): string {
@@ -225,7 +225,7 @@ export default function Builder() {
                     type="number"
                     step={1}
                     value={leg.option?.strike ?? draft.referencePrice}
-                    onChange={(e) => updateLeg(i, (l) => (l.kind === 'option' ? { ...l, option: { ...(l.option as any), strike: Number(e.target.value) || draft.referencePrice } } : l))}
+                                        onChange={(e) => updateLeg(i, (l) => (l.kind === 'option' ? { ...l, option: { ...l.option!, strike: Number(e.target.value) || draft.referencePrice } } : l))}
                   />
                 </label>
               )}

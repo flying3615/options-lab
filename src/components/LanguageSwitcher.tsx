@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/router';
 import styles from './LanguageSwitcher.module.scss';
 
 const CNFlag = () => (
@@ -39,9 +40,12 @@ const USFlag = () => (
 
 export default function LanguageSwitcher() {
   const { i18n } = useTranslation();
+  const router = useRouter();
+  const { pathname, asPath, query } = router;
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
+    router.push({ pathname, query }, asPath, { locale: lng });
   };
 
   return (
