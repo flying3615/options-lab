@@ -1,13 +1,14 @@
 import { useEffect, useMemo } from 'react'
-import { strategies } from '../data/strategies'
-import type { Strategy } from '../lib/types'
-import MultiPayoffChart from '../components/MultiPayoffChart'
-import MetricsPanel from '../components/MetricsPanel'
-import { useCompareIds, useInitFromSearch, useSetCompare, useSwapCompare } from '../lib/store'
-import { updateCompareInUrl } from '../lib/url'
+import { useRouter } from 'next/router'
+import { strategies } from '../src/data/strategies'
+import type { Strategy } from '../src/lib/types'
+import MultiPayoffChart from '../src/components/MultiPayoffChart'
+import MetricsPanel from '../src/components/MetricsPanel'
+import { useCompareIds, useInitFromSearch, useSetCompare, useSwapCompare } from '../src/lib/store'
 import styles from './Compare.module.scss';
 
 export default function Compare() {
+  const router = useRouter()
   const initFromSearch = useInitFromSearch()
   const setCompare = useSetCompare()
   const swap = useSwapCompare()
@@ -16,11 +17,12 @@ export default function Compare() {
 
   // 初始化：从 URL ?a= & ?b= 读取
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      initFromSearch(window.location.search, allIds)
+    if (router.isReady) {
+      const search = '?' + new URLSearchParams(router.query as Record<string, string>).toString()
+      initFromSearch(search, allIds)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allIds.join('|')])
+  }, [router.isReady, allIds.join('|')])
 
   // 若均为空，默认选择前两个策略
   useEffect(() => {
@@ -32,7 +34,19 @@ export default function Compare() {
 
   // 选择变更时同步 URL
   useEffect(() => {
-    updateCompareInUrl(aId, bId)
+    const query = { ...router.query }
+    if (aId) {
+      query.a = aId
+    } else {
+      delete query.a
+    }
+    if (bId) {
+      query.b = bId
+    } else {
+      delete query.b
+    }
+    router.push({ query }, undefined, { shallow: true })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [aId, bId])
 
   const a = useMemo(() => strategies.find((s) => s.id === aId) || null, [aId])

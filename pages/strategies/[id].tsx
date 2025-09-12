@@ -1,16 +1,15 @@
-import { useMemo, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { findStrategy } from '../data/strategies'
-import PayoffChart from '../components/PayoffChart'
-import CompositionSteps from '../components/CompositionSteps'
-import SingleLegsChart from '../components/SingleLegsChart'
-import MetricsPanel from '../components/MetricsPanel'
-import LegEditor from '../components/LegEditor'
-import styles from './StrategyDetail.module.scss';
+import { useEffect, useState } from 'react'
+import ReactDOMServer from 'react-dom/server';
+import { strategies as allStrategies, findStrategy } from '../../src/data/strategies'
+import type { Strategy } from '../../src/lib/types'
+import PayoffChart from '../../src/components/PayoffChart'
+import CompositionSteps from '../../src/components/CompositionSteps'
+import SingleLegsChart from '../../src/components/SingleLegsChart'
+import MetricsPanel from '../../src/components/MetricsPanel'
+import LegEditor from '../../src/components/LegEditor'
+import styles from '../StrategyDetail.module.scss';
 
-export default function StrategyDetail() {
-  const { id } = useParams()
-  const strategy = useMemo(() => (id ? findStrategy(id) : undefined), [id])
+export default function StrategyDetail({ strategy, exampleHtml }: { strategy: Omit<Strategy, 'example'>, exampleHtml: string | null }) {
   const [draft, setDraft] = useState(strategy)
   useEffect(() => { setDraft(strategy) }, [strategy])
   const s = draft ?? strategy
@@ -19,7 +18,6 @@ export default function StrategyDetail() {
     return (
       <section>
         <h1>策略未找到</h1>
-        <p>无效的策略标识：{id}</p>
       </section>
     )
   }
@@ -75,7 +73,7 @@ export default function StrategyDetail() {
           ))}
         </ul>
 
-        {(s.concept || s.formula || s.example) && (
+        {(s.concept || s.formula || exampleHtml) && (
           <div className={styles.contentSection}>
             {s.concept && (
               <div>
@@ -93,10 +91,10 @@ export default function StrategyDetail() {
                 </ul>
               </div>
             )}
-            {s.example && (
+            {exampleHtml && (
               <div>
                 <h2>举例</h2>
-                {s.example}
+                <div dangerouslySetInnerHTML={{ __html: exampleHtml }} />
               </div>
             )}
           </div>
@@ -141,4 +139,40 @@ export default function StrategyDetail() {
       </div>
     </div>
   )
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export async function getStaticPaths({ locales }: { locales: string[] }) {
+  const paths = [];
+  for (const locale of locales) {
+    for (const s of allStrategies) {
+      paths.push({
+        params: { id: s.id },
+        locale,
+      });
+    }
+  }
+
+  return { paths, fallback: false }
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export async function getStaticProps({ params }: { params: { id: string }}) {
+  const strategy = findStrategy(params.id)
+
+  if (!strategy) {
+    return {
+      notFound: true,
+    }
+  }
+
+  const exampleHtml = strategy.example ? ReactDOMServer.renderToString(strategy.example) : null;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { example, ...rest } = strategy;
+  return {
+    props: {
+      strategy: rest,
+      exampleHtml,
+    },
+  }
 }

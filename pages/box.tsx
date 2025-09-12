@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import styles from './Box.module.scss';
 
 export default function Box() {
@@ -44,8 +44,8 @@ export default function Box() {
       </div>
 
       <div className={styles.flexLinks}>
-        <Link to="/strategies"><button>返回策略库</button></Link>
-        <Link to="/"><button>返回首页</button></Link>
+        <Link href="/strategies"><button>返回策略库</button></Link>
+        <Link href="/"><button>返回首页</button></Link>
       </div>
     </section>
   )

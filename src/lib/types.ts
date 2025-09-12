@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+
 
 export type OptionType = 'call' | 'put'
 export type Position = 'long' | 'short'
@@ -33,7 +33,7 @@ export interface Strategy {
   risks?: string[] // 风险提示
   concept?: string // 概念解释（更口语化）
   formula?: string[] // 关键公式/逻辑（纯文本）
-  example?: ReactNode // 举例（现金流、情景）
+  
   stepNotes?: string[] // 逐步叠加演示的每步说明
 
   // 可选：知识型卡片（不渲染盈亏图），点击跳转到指定页面

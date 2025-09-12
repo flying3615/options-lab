@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import styles from './Wizard.module.scss';
 
 type Outlook = '大涨' | '温和上涨' | '盘整' | '温和下跌' | '大跌';
@@ -125,10 +125,10 @@ export default function Wizard() {
         {step === 3 && suggestion && (
           <div className={styles.suggestionBox}>
             <h3>我们为您推荐：</h3>
-            <h2><Link to={`/strategies/${suggestion.id}`}>{suggestion.name}</Link></h2>
+            <h2><Link href={`/strategies/${suggestion.id}`}>{suggestion.name}</Link></h2>
             <p>{suggestion.reason}</p>
             <div className={styles.flexButtons}>
-              <Link to={`/strategies/${suggestion.id}`} className="button">查看策略详情</Link>
+              <Link href={`/strategies/${suggestion.id}`} className="button">查看策略详情</Link>
               <button onClick={reset}>重新测试</button>
             </div>
           </div>

@@ -1,10 +1,11 @@
 import { useMemo, useState } from 'react'
-import { strategies } from '../data/strategies'
-import StrategyCard from '../components/StrategyCard'
-import { loadUserStrategies } from '../lib/userStrategies'
-import styles from './Strategies.module.scss';
+import { strategies as allStrategies } from '../../src/data/strategies'
+import StrategyCard from '../../src/components/StrategyCard'
+import { loadUserStrategies } from '../../src/lib/userStrategies'
+import styles from '../Strategies.module.scss';
+import type { Strategy } from '../../src/lib/types';
 
-type Group = { name: string; items: typeof strategies }
+type Group = { name: string; items: Strategy[] }
 type GroupingMode = 'outlook' | 'difficulty'
 
 /** 按方向分组 */
@@ -17,7 +18,7 @@ function classifyByOutlook(name: string, tags?: string[]): '看多' | '看空' |
 }
 
 /** 按策略内在复杂度（期权腿数量）进行分组 */
-function classifyByDifficulty(s: { id: string; legs: any[] }): '新手入门' | '中级策略' | '高级策略' {
+function classifyByDifficulty(s: Strategy): '新手入门' | '中级策略' | '高级策略' {
   // 特例：某些策略虽然腿数不多，但概念上属于高级
   if (s.id === 'box-spread' || s.id === 'calendar-spread') {
     return '高级策略'
@@ -29,11 +30,11 @@ function classifyByDifficulty(s: { id: string; legs: any[] }): '新手入门' | 
   return '高级策略'
 }
 
-export default function Strategies() {
+export default function Strategies({ strategies }: { strategies: Strategy[] }) {
   const [groupingMode, setGroupingMode] = useState<GroupingMode>('outlook')
 
   const groups = useMemo<Group[]>(() => {
-    const map = new Map<string, typeof strategies>()
+    const map = new Map<string, Strategy[]>()
 
     if (groupingMode === 'outlook') {
       for (const s of strategies) {
@@ -44,7 +45,7 @@ export default function Strategies() {
       const order: Array<'看多' | '看空' | '中性'> = ['看多', '看空', '中性']
       const out: Group[] = order
         .filter((g) => map.has(g))
-        .map((g) => ({ name: g as string, items: map.get(g)! } as Group))
+        .map((g) => ({ name: g as string, items: map.get(g)! }))
       return out
     } else {
       for (const s of strategies) {
@@ -55,10 +56,10 @@ export default function Strategies() {
       const order: Array<'新手入门' | '中级策略' | '高级策略'> = ['新手入门', '中级策略', '高级策略']
       const out: Group[] = order
         .filter((g) => map.has(g))
-        .map((g) => ({ name: g as string, items: map.get(g)! } as Group))
+        .map((g) => ({ name: g as string, items: map.get(g)! }))
       return out
     }
-  }, [groupingMode])
+  }, [groupingMode, strategies])
 
   // 用户自定义策略（始终显示在最前）
   const userStrategiesGroup = useMemo<Group | null>(() => {
@@ -102,4 +103,18 @@ export default function Strategies() {
       ))}
     </section>
   )
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export async function getStaticProps() {
+  const strategies = allStrategies.map(s => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { example, ...rest } = s;
+    return rest;
+  })
+  return {
+    props: {
+      strategies,
+    },
+  }
 }
