@@ -1,69 +1,56 @@
-# React + TypeScript + Vite
+# Options Lab
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A laboratory for experimenting with and visualizing financial options strategies.
 
-Currently, two official plugins are available:
+This project is a web-based tool designed to help users understand, analyze, and visualize various options trading strategies. It provides interactive charts and detailed breakdowns of strategies, making it an excellent resource for both beginners and experienced traders.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Strategy Library:** Explore a comprehensive library of pre-defined options strategies, categorized by market outlook (bullish, bearish, neutral).
+- **Interactive Payoff Charts:** Visualize the profit/loss profile of each strategy with interactive charts powered by ECharts.
+- **Strategy Comparison:** Compare two strategies side-by-side to understand their differences in risk and reward.
+- **Strategy Builder:** Create and save your own custom options strategies by combining different legs (long/short calls, puts, and stock).
+- **Strategy Wizard:** Get strategy suggestions based on your market outlook and risk tolerance.
+- **Educational Content:** Learn the basics of options trading with a dedicated "Basics" section and a glossary of terms.
+- **Composition Steps:** See how a complex strategy is built up from its individual legs.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Frontend:** React, TypeScript
+- **Charting:** ECharts
+- **Routing:** React Router
+- **State Management:** Zustand
+- **Build Tool:** Vite
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Prerequisites
+
+- Node.js (v18 or later recommended)
+- npm, pnpm, or yarn
+
+### Installation
+
+1.  Clone the repository.
+2.  Navigate to the project directory.
+3.  Install dependencies:
+    ```bash
+    npm install
+    ```
+
+### Running the Development Server
+
+To start the development server, run:
+
+```bash
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open your browser and navigate to the URL provided in the terminal to see the application.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Available Scripts
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+-   `dev`: Runs the app in development mode.
+-   `build`: Builds the app for production.
+-   `lint`: Lints the source code.
+-   `preview`: Serves the production build locally for preview.
