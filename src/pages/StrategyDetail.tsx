@@ -38,6 +38,22 @@ export default function StrategyDetail() {
             <button onClick={() => setDraft(strategy!)} disabled={!strategy}>重置示例</button>
           </div>
         </div>
+        <div style={{ padding: '1rem', border: '1px solid #eee', borderRadius: '4px', marginBottom: '1rem' }}>
+          <label>
+            参考标的价 (S₀):
+            <input
+              type="number"
+              style={{ marginLeft: '0.5rem', padding: '0.25rem 0.5rem' }}
+              value={s.referencePrice}
+              onChange={(e) => {
+                const newPrice = Number(e.target.value);
+                if (newPrice > 0) {
+                  setDraft({ ...s, referencePrice: newPrice });
+                }
+              }}
+            />
+          </label>
+        </div>
         <LegEditor strategy={s} onChange={setDraft} />
 
         <h2>单腿到期盈亏（对照学习）</h2>
