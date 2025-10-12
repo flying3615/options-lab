@@ -2,9 +2,9 @@ import type { Strategy } from '../../../lib/types';
 
 const strategy: Strategy = {
   id: 'reverse-ratio-put-spread',
-  name: '反向看跌比例价差 (Reverse Ratio Put Spread 2x1)',
+  name: '反向看跌比例价差 (Reverse Ratio Put Spread 2x1) Put Ratio Backspread',
   referencePrice: 100,
-  tags: ['方向：大看空', '波动率策略', '风险：有限'],
+  tags: ['方向：大看空', '波动率策略', '风险：有限', 'Put Ratio Backspread', 'Backspread'],
   summary: '买入2份或更多较低执行价的看跌期权，同时卖出1份较高执行价的看跌期权，以博取股价大幅下跌的利润。',
   description: '反向看跌比例价差是一种看空策略，但与标准的熊市价差不同，它在股价大幅下跌时具有无限的盈利潜力。通过买入更多份数的看跌期权，该策略牺牲了在小幅下跌行情中的表现，以换取在“黑天鹅”事件或市场崩盘中获得巨大回报的能力。',
   concept: '这可以看作是一种“买彩票”式的看空策略。你卖掉一份“小跌保险”（卖出较高价看跌期权）来收钱，然后用这笔钱加倍买入两份“暴跌彩票”（买入较低价看跌期权）。如果市场只是小跌或上涨，你卖出的保险会让你亏钱。但如果市场真的崩盘，你的两张彩票会带来远超保险亏损的巨大回报。',
