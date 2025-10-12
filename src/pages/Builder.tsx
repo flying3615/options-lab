@@ -10,13 +10,11 @@ function genLegId(prefix = 'leg'): string {
   return prefix + '-' + Math.random().toString(36).slice(2, 8)
 }
 
-const defaultRef = 100
-
 function emptyStrategy(): Strategy {
   return {
     id: 'user-temp',
     name: '自定义策略',
-    referencePrice: defaultRef,
+    referencePrice: 100,
     legs: []
   }
 }
@@ -32,12 +30,12 @@ export default function Builder() {
       ...d,
       legs: [
         ...d.legs,
-        { id: genLegId('stk'), kind: 'stock', position, qty: position === 'long' ? 100 : 100, entryPrice: defaultRef }
+        { id: genLegId('stk'), kind: 'stock', position, qty: position === 'long' ? 100 : 100, entryPrice: d.referencePrice }
       ]
     }))
   }
 
-  function addOption(position: Position, type: OptionType, strike = defaultRef, entryPrice = 1, qty = 1) {
+  function addOption(position: Position, type: OptionType, strike: number, entryPrice = 1, qty = 1) {
     setDraft((d) => ({
       ...d,
       legs: [
@@ -102,7 +100,7 @@ export default function Builder() {
               type="number"
               step={1}
               value={draft.referencePrice}
-              onChange={(e) => setDraft({ ...draft, referencePrice: Number(e.target.value) || defaultRef })}
+              onChange={(e) => setDraft({ ...draft, referencePrice: Number(e.target.value) || 100 })}
               className={styles.inputRef}
             />
           </label>
