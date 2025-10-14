@@ -15,6 +15,19 @@
   gap: 16px;
 }
 
+.greeksRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 1200px) {
+  .greeksRow {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
 .greekCard {
   background-color: var(--panel);
   border-radius: var(--radius);
@@ -35,4 +48,73 @@
   font-weight: bold;
   color: var(--accent);
   line-height: 1;
+}
+
+.tipsSection {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  border-left: 4px solid #3b82f6;
+}
+
+.tipsSection h2 {
+  margin-top: 0;
+  color: #1e40af;
+}
+
+.faqs {
+  margin-top: 1rem;
+}
+
+.faqItem {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.faqItem:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.faqItem h4 {
+  color: #334155;
+  margin-bottom: 0.5rem;
+}
+
+.faqItem p {
+  margin: 0;
+  line-height: 1.6;
+  color: #475569;
+}
+
+.riskCard {
+  padding: 1rem;
+  background-color: #fef3c7;
+  border-radius: 6px;
+  border-left: 3px solid #f59e0b;
+  margin-bottom: 1rem;
+}
+
+.riskCard h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #92400e;
+  font-size: 1rem;
+}
+
+.riskCard ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.riskCard li {
+  margin-bottom: 0.3rem;
+  line-height: 1.4;
+  color: #78350f;
+}
+
+.riskCard li:last-child {
+  margin-bottom: 0;
 }
