@@ -35,7 +35,7 @@ import longRiskReversal from './strategies/bull/long-risk-reversal.tsx'
 import shortRiskReversal from './strategies/bear/short-risk-reversal.tsx'
 import syntheticLong from './strategies/bull/synthetic-long.tsx'
 import syntheticShort from './strategies/bear/synthetic-short.tsx'
-import boxSpread from './strategies/neutral/box-spread'
+import boxSpread from './strategies/neutral/box-spread.tsx'
 import calendarSpread from './strategies/neutral/calendar-spread'
 
 export const strategies: Strategy[] = [
