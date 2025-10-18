@@ -3,6 +3,7 @@ import type { Strategy, Leg } from '../lib/types'
 import styles from './LegEditor.module.scss';
 
 function toNumber(v: string, fallback = 0) {
+  if (v === '' || v === undefined) return NaN
   const n = parseFloat(v)
   return Number.isFinite(n) ? n : fallback
 }
