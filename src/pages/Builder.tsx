@@ -264,7 +264,7 @@ export default function Builder() {
         </div>
       )}
 
-      <h2>到期盈亏图</h2>
+      <h2>到期盈亏</h2>
       <PayoffChart strategy={draft} />
 
       <div className={`metrics-grid ${styles.metricsGrid}`}>
