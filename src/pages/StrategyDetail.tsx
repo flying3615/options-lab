@@ -45,6 +45,7 @@ export default function StrategyDetail() {
               type="number"
               style={{ marginLeft: '0.5rem', padding: '0.25rem 0.5rem' }}
               value={s.referencePrice}
+              onFocus={(e) => e.target.select()}
               onChange={(e) => {
                 const newPrice = Number(e.target.value);
                 if (newPrice > 0) {

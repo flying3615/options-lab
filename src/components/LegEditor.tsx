@@ -36,6 +36,7 @@ export default function LegEditor({ strategy, onChange }: Props) {
                 step={1}
                 min={0}
                 value={leg.qty}
+                onFocus={(e) => e.target.select()}
                 onChange={(e) =>
                   updateLegAt(i, (l) => ({ ...l, qty: Math.max(0, Math.round(toNumber(e.target.value, l.qty))) }))
                 }
@@ -49,6 +50,7 @@ export default function LegEditor({ strategy, onChange }: Props) {
                   type="number"
                   step={1}
                   value={leg.option?.strike ?? 0}
+                  onFocus={(e) => e.target.select()}
                   onChange={(e) =>
                     updateLegAt(i, (l) =>
                       l.kind === 'option'
@@ -66,6 +68,7 @@ export default function LegEditor({ strategy, onChange }: Props) {
                 type="number"
                 step={0.5}
                 value={leg.entryPrice ?? 0}
+                onFocus={(e) => e.target.select()}
                 onChange={(e) =>
                   updateLegAt(i, (l) => ({ ...l, entryPrice: toNumber(e.target.value, l.entryPrice ?? 0) }))
                 }
