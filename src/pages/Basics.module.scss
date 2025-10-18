@@ -16,16 +16,10 @@
 }
 
 .greeksRow {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 16px;
   margin-bottom: 1rem;
-}
-
-@media (min-width: 1200px) {
-  .greeksRow {
-    grid-template-columns: repeat(5, 1fr);
-  }
 }
 
 .greekCard {
