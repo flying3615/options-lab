@@ -100,6 +100,9 @@ export default function Basics() {
           <p>看涨期权 (Call Option) 的 Delta 是正数（0 到 1 之间）。比如 Delta 是 0.6，就意味着股票每涨 1 美元，你的看涨期权价格大约会上涨 0.6 美元。</p>
           <p>看跌期权 (Put Option) 的 Delta 是负数（-1 到 0 之间）。比如 Delta 是 -0.4，就意味着股票每涨 1 美元，你的看跌期权价格反而会下跌 0.4 美元。</p>
           <p>Delta 的数值，还可以被看作是期权在到期时成为实值期权（In-the-Money）的近似概率。比如，一个 Delta 为 0.6 的看涨期权，可以粗略地理解为它有大约 60% 的可能性在到期时是赚钱的（即股价高于行权价）。</p>
+          <p>* 想象一个深度实值 (Deep ITM) 的看涨期权：比如，行权价是 $50，而现在股价是 $100。它到期时成为实值的概率是不是非常非常高？几乎是 100% 吧？你看它的 Delta，也几乎就是 1。两者高度吻合。</p>
+          <p>* 想象一个深度虚值 (Deep OTM) 的看涨期权：比如，行权价是 $150，而股价是 $100。它需要股价暴涨 50% 才能成为实值，这个概率是不是非常非常低？几乎是 0% 吧？你看它的 Delta，也几乎就是 0。两者再次吻合。</p>
+          <p>* 想象一个平值 (ATM) 的看涨期权：行权价和股价都是 $100。股价上涨或下跌的概率就像抛硬币，一半一半，也就是大约 50% 的机会成为实值。你看它的 Delta，正好就在 0.5 左右。</p>
         </div>
         <div className={styles.greekCard}>
           <h3><span className={styles.greekSymbol}>Γ</span> Gamma: 加速度/油门</h3>
@@ -134,7 +137,46 @@ export default function Basics() {
         </div>
       </div>
 
+      <h3>近月期权 vs. 远月期权：选择你的战场</h3>
+      <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '2rem', backgroundColor: 'var(--panel)', borderRadius: '8px', overflow: 'hidden' }}>
+        <thead>
+          <tr style={{ backgroundColor: 'var(--accent)', color: 'white', borderBottom: '2px solid var(--border-color)' }}>
+            <th style={{ padding: '12px', textAlign: 'left', borderRight: '1px solid var(--border-color)' }}>特征</th>
+            <th style={{ padding: '12px', textAlign: 'left', borderRight: '1px solid var(--border-color)' }}>近月期权 (Near-Term)</th>
+            <th style={{ padding: '12px', textAlign: 'left', borderRight: '1px solid var(--border-color)' }}>远月期权 (Long-Term)</th>
+            <th style={{ padding: '12px', textAlign: 'left' }}>交易含义</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', borderBottom: '1px solid var(--border-color)' }}>
+            <td style={{ padding: '12px', borderRight: '1px solid var(--border-color)' }}>Gamma (Γ)</td>
+            <td style={{ padding: '12px', borderRight: '1px solid var(--border-color)' }}>高</td>
+            <td style={{ padding: '12px', borderRight: '1px solid var(--border-color)' }}>低</td>
+            <td style={{ padding: '12px' }}>追求短期、爆炸性行情的"赌徒”之选</td>
+          </tr>
+          <tr style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)' }}>
+            <td style={{ padding: '12px', borderRight: '1px solid var(--border-color)' }}>Theta (Θ)</td>
+            <td style={{ padding: '12px', borderRight: '1px solid var(--border-color)' }}>高 (负)</td>
+            <td style={{ padding: '12px', borderRight: '1px solid var(--border-color)' }}>低 (负)</td>
+            <td style={{ padding: '12px' }}>时间是最大的敌人，持仓成本极高</td>
+          </tr>
+          <tr style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', borderBottom: '1px solid var(--border-color)' }}>
+            <td style={{ padding: '12px', borderRight: '1px solid var(--border-color)' }}>Vega (ν)</td>
+            <td style={{ padding: '12px', borderRight: '1px solid var(--border-color)' }}>低</td>
+            <td style={{ padding: '12px', borderRight: '1px solid var(--border-color)' }}>高</td>
+            <td style={{ padding: '12px' }}>对整体市场波动率更敏感的"趋势”之选</td>
+          </tr>
+          <tr style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)' }}>
+            <td style={{ padding: '12px', borderRight: '1px solid var(--border-color)' }}>成本</td>
+            <td style={{ padding: '12px', borderRight: '1px solid var(--border-color)' }}>便宜</td>
+            <td style={{ padding: '12px', borderRight: '1px solid var(--border-color)' }}>昂贵</td>
+            <td style={{ padding: '12px' }}>前者是"彩票"，后者是"投资"</td>
+          </tr>
+        </tbody>
+      </table>
 
+      <p>如果你认为"就在这周！" -》 你应该选择近月的虚值看涨期权。你是在用高昂的Theta成本，去赌它高Gamma带来的爆炸性回报。这是一场闪电战。</p>
+      <p>如果你认为"未来半年内会到" -》 你应该选择远月的看涨期权。你支付了更高的权利金，换来了低Theta损耗和更长的等待时间。这是一场持久战。你更关心的是趋势（Vega也会帮你），而不是一两天的波动。</p>
 
       <h3>波动率策略选择表</h3>
       <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '2rem', backgroundColor: 'var(--panel)', borderRadius: '8px', overflow: 'hidden' }}>
