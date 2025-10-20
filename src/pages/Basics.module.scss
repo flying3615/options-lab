@@ -112,3 +112,33 @@
 .riskCard li:last-child {
   margin-bottom: 0;
 }
+
+.strategyTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: var(--panel);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.strategyTable th,
+.strategyTable td {
+  border: 1px solid var(--border-color);
+  padding: 12px;
+  text-align: left;
+}
+
+.strategyTable th {
+  background-color: var(--accent);
+  color: white;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.strategyTable td {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.strategyTable tr:nth-child(even) td {
+  background-color: rgba(255, 255, 255, 0.02);
+}

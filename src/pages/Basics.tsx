@@ -207,6 +207,56 @@ export default function Basics() {
         </tbody>
       </table>
 
+      <h3>期权策略选择指南</h3>
+      <table className={styles.strategyTable}>
+        <thead>
+          <tr>
+            <th>市场预期</th>
+            <th>IV 水平</th>
+            <th>推荐策略</th>
+            <th>策略描述</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>温和看涨</td>
+            <td>高 IV</td>
+            <td>牛市看跌价差 (Bull Put Spread)</td>
+            <td>"收高价租"：在高位地板下方卖出昂贵的看跌期权，只要不跌破地板就稳赚租金。</td>
+          </tr>
+          <tr>
+            <td>温和看涨</td>
+            <td>低 IV</td>
+            <td>牛市看涨价差 (Bull Call Spread)</td>
+            <td>"买打折票"：买入便宜的看涨期权，同时卖出更高价的来补贴成本，博取上涨收益。</td>
+          </tr>
+          <tr>
+            <td>温和看跌</td>
+            <td>高 IV</td>
+            <td>熊市看涨价差 (Bear Call Spread)</td>
+            <td>"收高价租"：在低位天花板上方卖出昂贵的看涨期权，只要不涨破天花板就稳赚租金。</td>
+          </tr>
+          <tr>
+            <td>温和看跌</td>
+            <td>低 IV</td>
+            <td>熊市看跌价差 (Bear Put Spread)</td>
+            <td>"买打折保险"：买入便宜的看跌期权，同时卖出更低价的来补贴成本，博取下跌收益。</td>
+          </tr>
+          <tr>
+            <td>中性/横盘</td>
+            <td>高 IV</td>
+            <td>铁鹰式策略 (Iron Condor)</td>
+            <td>"建房收租"：同时构建天花板和地板，只要股价在中间活动，就稳定赚取高额时间价值。优先选择宽的盈利区间以提高胜率。</td>
+          </tr>
+          <tr>
+            <td>中性/横盘</td>
+            <td>低 IV</td>
+            <td>日历价差 (Calendar Spread)</td>
+            <td>"古董收藏家"：买入便宜的远月期权（长期资产），卖出近月期权（短期租约），赚取时间衰减的速度差和未来IV上升的利润。</td>
+          </tr>
+        </tbody>
+      </table>
+
       <h2>核心概念：移仓 (Rolling)</h2>
       <div className={styles.greekCard}>
         <h3>什么是移仓 (Rolling)？</h3>
@@ -351,30 +401,6 @@ export default function Basics() {
           <p>市场在说什么？ "未来会非常平静，大家可以放心。" 市场情绪非常自满或冷淡，导致期权价格（天气预报）非常低。</p>
           <p>这时的期权是？ 便宜的 (Cheap)！ 就像在一个看似平静但有潜在风险的地方，保险卖得特别便宜。</p>
           <p>我们的策略： 在这种时候，我们应该考虑成为买保险的人，也就是期权买方（比如直接买入Call/Put或买入价差策略）。我们可以用很低的成本，去博取一个"黑天鹅"事件的发生。</p>
-        </div>
-      </div>
-
-      <h2>实战应用：波动率与策略选择</h2>
-      <div className={styles.greeksGrid}>
-        <div className={styles.greekCard}>
-          <h3>场景一：股价大跌之后</h3>
-          <p><strong>市场会发生什么？</strong> 恐慌！不确定性急剧增加。投资者害怕股价会继续下跌，纷纷去购买看跌期权（Put）作为保险。</p>
-          <p><strong>IV会怎样？</strong> IV会飙升。这意味着所有的期权，尤其是看跌期权，都变得非常昂贵。</p>
-          <p><strong>这时我们该做什么？</strong> 当东西很贵的时候，我们应该考虑卖出它，而不是买入。</p>
-          <p><strong>所以用哪个策略？</strong> 这正是牛市看跌价差 (Bull Put Spread) 的绝佳使用时机！</p>
-          <p><strong>你的观点：</strong>你认为股价已经跌得差不多了，不太可能继续暴跌，可能会进入筑底、横盘甚至反弹。</p>
-          <p><strong>你的操作：</strong>你卖出一个昂贵的看跌期权价差，收取非常可观的权利金（"租金"）。因为 IV 很高，你收到的"租金"会比平时多得多。</p>
-          <p><strong>结论：</strong> 在股价大跌后，如果你认为下跌动能衰竭，使用牛市看跌价差是非常明智的，因为它让你利用高 IV 成为了一个"收高价租的房东"。</p>
-        </div>
-        <div className={styles.greekCard}>
-          <h3>场景二：股价大涨之后</h3>
-          <p><strong>市场会发生什么？</strong> 市场情绪通常会变得乐观甚至自满。对未来波动的预期可能会下降。</p>
-          <p><strong>IV会怎样？</strong> 经常会出现"波动率挤压 (Volatility Crush)"，IV 会变得很低。期权变得非常便宜。</p>
-          <p><strong>这时我们该做什么？</strong> 当东西很便宜的时候，是买入它的好时机。</p>
-          <p><strong>这时如果你想做空怎么办？</strong> 如果你认为股价涨得太高，可能会回调或下跌，你需要一个看跌的策略。这时候，熊市看跌价差 (Bear Put Spread) 就派上用场了。</p>
-          <p><strong>你的观点：</strong>你认为上涨动能不足，股价要回调。</p>
-          <p><strong>你的操作：</strong>你买入一个看跌期权价差。因为 IV 很低，你买入这个价差的成本（"门票"）会非常便宜，这让你的盈亏比变得极具吸引力。你可以用很小的风险去博取潜在的回调利润。</p>
-          <p><strong>结论：</strong> 在股价大涨后，如果你认为股价要回调，使用熊市看跌价差更合适，因为它让你能以低成本"买彩票"，博取高赔率。</p>
         </div>
       </div>
 
