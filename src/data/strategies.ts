@@ -15,6 +15,13 @@ import shortStrangle from './strategies/neutral/short-strangle.tsx'
 import ironCondor from './strategies/neutral/iron-condor.tsx'
 import butterflyCall from './strategies/neutral/butterfly-call.tsx'
 import butterflyCallShort from './strategies/neutral/butterfly-call-short.tsx'
+import butterflyPut from './strategies/neutral/butterfly-put.tsx'
+import butterflyPutShort from './strategies/neutral/butterfly-put-short.tsx'
+import ironCondorLong from './strategies/neutral/iron-condor-long.tsx'
+import longCallCondor from './strategies/neutral/long-call-condor.tsx'
+import longPutCondor from './strategies/neutral/long-put-condor.tsx'
+import shortCallCondor from './strategies/neutral/short-call-condor.tsx'
+import shortPutCondor from './strategies/neutral/short-put-condor.tsx'
 import bullPutCreditSpread from './strategies/bull/bull-put-credit-spread.tsx'
 import bearCallCreditSpread from './strategies/bear/bear-call-credit-spread.tsx'
 import collar from './strategies/neutral/collar.tsx'
@@ -28,7 +35,7 @@ import longRiskReversal from './strategies/bull/long-risk-reversal.tsx'
 import shortRiskReversal from './strategies/bear/short-risk-reversal.tsx'
 import syntheticLong from './strategies/bull/synthetic-long.tsx'
 import syntheticShort from './strategies/bear/synthetic-short.tsx'
-import boxSpread from './strategies/neutral/box-spread'
+import boxSpread from './strategies/neutral/box-spread.tsx'
 import calendarSpread from './strategies/neutral/calendar-spread'
 
 export const strategies: Strategy[] = [
@@ -60,9 +67,16 @@ export const strategies: Strategy[] = [
   // 蝶式 / 铁蝶 / 铁鹰
   butterflyCall,
   butterflyCallShort,
+  butterflyPut,
+  butterflyPutShort,
   ironButterfly,
   ironButterflyLong,
   ironCondor,
+  ironCondorLong,
+  longCallCondor,
+  longPutCondor,
+  shortCallCondor,
+  shortPutCondor,
 
   // 比例与反向比例
   ratioCallSpread,

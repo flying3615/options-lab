@@ -19,34 +19,35 @@ function App() {
     <div className="container">
       <nav className="nav">
         <Link to="/" className="brand" onClick={() => setMenuOpen(false)}>
+          <div className="brand-logo"></div>
           <span className="brand-text">Options Lab</span>
         </Link>
-        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+        <button className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(!menuOpen)}>
           <span className="bar"></span>
           <span className="bar"></span>
           <span className="bar"></span>
         </button>
         <ul className={`menu ${menuOpen ? 'open' : ''}`}>
           <li onClick={() => setMenuOpen(false)}>
-            <NavLink to="/" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>🏠 首页</NavLink>
+            <NavLink to="/" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>首页</NavLink>
           </li>
           <li onClick={() => setMenuOpen(false)}>
-            <NavLink to="/basics" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>🎓 新手入门</NavLink>
+            <NavLink to="/basics" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>新手入门</NavLink>
           </li>
           <li onClick={() => setMenuOpen(false)}>
-            <NavLink to="/strategies" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>📚 策略库</NavLink>
+            <NavLink to="/strategies" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>策略库</NavLink>
           </li>
           <li onClick={() => setMenuOpen(false)}>
-            <NavLink to="/wizard" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>✨ 策略向导</NavLink>
+            <NavLink to="/wizard" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>策略向导</NavLink>
           </li>
           <li onClick={() => setMenuOpen(false)}>
-            <NavLink to="/builder" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>🛠️ 构建</NavLink>
+            <NavLink to="/builder" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>策略构建</NavLink>
           </li>
           <li onClick={() => setMenuOpen(false)}>
-            <NavLink to="/compare" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>⚖️ 对比</NavLink>
+            <NavLink to="/compare" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>策略对比</NavLink>
           </li>
           <li onClick={() => setMenuOpen(false)}>
-            <NavLink to="/disclaimer" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}> 声明</NavLink>
+            <NavLink to="/disclaimer" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>免责声明</NavLink>
           </li>
         </ul>
       </nav>

@@ -18,5 +18,18 @@ export default function MiniPayoff({ strategy }: { strategy: Strategy }) {
       }
     ]
   }
-  return <ReactECharts option={option} className={styles.chart} style={{ height: '100%', width: '100%' }} />
+  return (
+    <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <ReactECharts 
+        option={option} 
+        className={styles.chart} 
+        style={{ 
+          height: '100%', 
+          width: '100%',
+          maxWidth: '140px',
+          margin: '0 auto'
+        }} 
+      />
+    </div>
+  )
 }

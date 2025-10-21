@@ -2,9 +2,9 @@ import type { Strategy } from '../../../lib/types';
 
 const strategy: Strategy = {
   id: 'reverse-ratio-call-spread',
-  name: '反向看涨比例价差 (Reverse Ratio Call Spread 2x1)',
+  name: '反向看涨比例价差 (Reverse Ratio Call Spread 2x1) Call Ratio Backspread',
   referencePrice: 100,
-  tags: ['方向：大看多', '波动率策略', '风险：有限'],
+  tags: ['方向：大看多', '波动率策略', '风险：有限', 'Call Ratio Backspread', 'Backspread'],
   summary: '买入2份或更多较高执行价的看涨期权，同时卖出1份较低执行价的看涨期权，以博取股价大幅上涨的利润。',
   description: '反向看涨比例价差是一种看多策略，但与标准的牛市价差不同，它在股价大幅上涨时具有无限的盈利潜力。通过买入更多份数的看涨期权，该策略牺牲了在小幅上涨行情中的表现，以换取在“黑天鹅”事件或市场飙升中获得巨大回报的能力。',
   concept: '这可以看作是一种“买彩票”式的看多策略。你卖掉一份“小涨保险”（卖出较低价看涨期权）来收钱，然后用这笔钱加倍买入两份“暴涨彩票”（买入较高价看涨期权）。如果市场只是小涨或下跌，你卖出的保险会让你亏钱。但如果市场真的暴涨，你的两张彩票会带来远超保险亏损的巨大回报。',

@@ -47,6 +47,7 @@ export default function Compare() {
     <section>
       <h1>策略对比</h1>
       <div className="controls">
+        <div>
         <label>策略 A：</label>
         <select
           value={aId ?? ''}
@@ -57,7 +58,8 @@ export default function Compare() {
             <option key={s.id} value={s.id}>{s.name}</option>
           ))}
         </select>
-
+        </div>
+        <div>
         <label>策略 B：</label>
         <select
           value={bId ?? ''}
@@ -68,7 +70,7 @@ export default function Compare() {
             <option key={s.id} value={s.id}>{s.name}</option>
           ))}
         </select>
-
+        </div>
         <button onClick={() => swap()}>交换 A/B</button>
         <button onClick={() => setCompare(1, null)}>清空 B</button>
         <button onClick={() => {

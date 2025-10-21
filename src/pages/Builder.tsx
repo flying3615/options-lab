@@ -100,6 +100,7 @@ export default function Builder() {
               type="number"
               step={1}
               value={draft.referencePrice}
+              onFocus={(e) => e.target.select()}
               onChange={(e) => setDraft({ ...draft, referencePrice: Number(e.target.value) || 100 })}
               className={styles.inputRef}
             />
@@ -199,7 +200,8 @@ export default function Builder() {
                   step={1}
                   min={0}
                   value={leg.qty}
-                  onChange={(e) => updateLeg(i, (l) => ({ ...l, qty: Math.max(0, Math.round(Number(e.target.value) || 0)) }))}
+                  onFocus={(e) => e.target.select()}
+                  onChange={(e) => updateLeg(i, (l) => ({ ...l, qty: Math.max(0, Math.round(Number(e.target.value) || NaN)) }))}
                 />
               </label>
 
@@ -223,7 +225,8 @@ export default function Builder() {
                     type="number"
                     step={1}
                     value={leg.option?.strike ?? draft.referencePrice}
-                    onChange={(e) => updateLeg(i, (l) => (l.kind === 'option' ? { ...l, option: { ...(l.option as any), strike: Number(e.target.value) || draft.referencePrice } } : l))}
+                    onFocus={(e) => e.target.select()}
+                    onChange={(e) => updateLeg(i, (l) => (l.kind === 'option' ? { ...l, option: { ...(l.option as any), strike: Number(e.target.value) || NaN } } : l))}
                   />
                 </label>
               )}
@@ -234,7 +237,8 @@ export default function Builder() {
                   type="number"
                   step={0.5}
                   value={leg.entryPrice ?? 0}
-                  onChange={(e) => updateLeg(i, (l) => ({ ...l, entryPrice: Number(e.target.value) || 0 }))}
+                  onFocus={(e) => e.target.select()}
+                  onChange={(e) => updateLeg(i, (l) => ({ ...l, entryPrice: Number(e.target.value) || NaN }))}
                 />
               </label>
 
@@ -246,7 +250,8 @@ export default function Builder() {
                     step={1}
                     min={1}
                     value={leg.multiplier ?? 100}
-                    onChange={(e) => updateLeg(i, (l) => (l.kind === 'option' ? { ...l, multiplier: Math.max(1, Math.round(Number(e.target.value) || 100)) } : l))}
+                    onFocus={(e) => e.target.select()}
+                    onChange={(e) => updateLeg(i, (l) => (l.kind === 'option' ? { ...l, multiplier: Math.max(1, Math.round(Number(e.target.value) || NaN)) } : l))}
                   />
                 </label>
               )}
@@ -259,7 +264,7 @@ export default function Builder() {
         </div>
       )}
 
-      <h2>到期盈亏图</h2>
+      <h2>到期盈亏</h2>
       <PayoffChart strategy={draft} />
 
       <div className={`metrics-grid ${styles.metricsGrid}`}>

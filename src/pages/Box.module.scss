@@ -8,3 +8,48 @@
   gap: 8px;
   flex-wrap: wrap;
 }
+
+.tagMargin {
+  margin-right: 8px;
+  margin-bottom: 4px;
+}
+
+.contentSection {
+  margin-top: 20px;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.notesSection {
+  margin-top: 20px;
+  padding: 16px;
+  background-color: #fef3c7;
+  border-left: 4px solid #f59e0b;
+  border-radius: 4px;
+}
+
+.notesSection h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #92400e;
+}
+
+.notesSection ul {
+  margin-bottom: 0;
+}
+
+.notesSection li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,56 +1,135 @@
 # Options Lab
 
-A laboratory for experimenting with and visualizing financial options strategies.
+一个用于实验和可视化金融期权策略的交互式学习平台。
 
-This project is a web-based tool designed to help users understand, analyze, and visualize various options trading strategies. It provides interactive charts and detailed breakdowns of strategies, making it an excellent resource for both beginners and experienced traders.
+本项目是一个基于Web的工具，旨在帮助用户理解、分析和可视化各种期权交易策略。它提供交互式图表和详细的策略分解，使其成为初学者和经验丰富交易者的优秀资源。
 
-## Features
+## ✨ 主要特性
 
-- **Strategy Library:** Explore a comprehensive library of pre-defined options strategies, categorized by market outlook (bullish, bearish, neutral).
-- **Interactive Payoff Charts:** Visualize the profit/loss profile of each strategy with interactive charts powered by ECharts.
-- **Strategy Comparison:** Compare two strategies side-by-side to understand their differences in risk and reward.
-- **Strategy Builder:** Create and save your own custom options strategies by combining different legs (long/short calls, puts, and stock).
-- **Strategy Wizard:** Get strategy suggestions based on your market outlook and risk tolerance.
-- **Educational Content:** Learn the basics of options trading with a dedicated "Basics" section and a glossary of terms.
-- **Composition Steps:** See how a complex strategy is built up from its individual legs.
+- **📚 策略库**：探索全面的预定义期权策略库，按市场展望（看涨、看跌、中性）分类
+- **📊 交互式盈亏图表**：使用ECharts驱动的交互式图表可视化每个策略的盈亏概况
+- **🔍 策略对比**：并排比较两个策略，了解它们在风险和回报方面的差异
+- **🛠️ 策略构建器**：通过组合不同的腿（多头/空头看涨、看跌期权和股票）创建和保存自定义期权策略
+- **🧙 策略向导**：根据您的市场展望和风险承受能力获取策略建议
+- **📖 教育内容**：通过专门的"基础知识"部分和术语表学习期权交易基础知识
+- **🔄 组合步骤**：查看复杂策略如何从各个组成部分构建而成
+- **🎯 新手友好**：提供生活化比喻和简单示例，让期权概念更容易理解
+- **⚡ 实时交互**：动态调整参数，即时查看策略表现变化
 
-## Tech Stack
+## 🛠️ 技术栈
 
-- **Frontend:** React, TypeScript
-- **Charting:** ECharts
-- **Routing:** React Router
-- **State Management:** Zustand
-- **Build Tool:** Vite
+- **前端框架**：React, TypeScript
+- **图表库**：ECharts
+- **路由管理**：React Router
+- **状态管理**：Zustand
+- **构建工具**：Vite
+- **样式**：SCSS Modules
 
-## Getting Started
+## 🚀 快速开始
 
-### Prerequisites
+### 环境要求
 
-- Node.js (v18 or later recommended)
-- npm, pnpm, or yarn
+- Node.js（推荐v18或更高版本）
+- npm, pnpm, 或 yarn
 
-### Installation
+### 安装步骤
 
-1.  Clone the repository.
-2.  Navigate to the project directory.
-3.  Install dependencies:
+1.  克隆仓库
+    ```bash
+    git clone [repository-url]
+    ```
+2.  进入项目目录
+    ```bash
+    cd option
+    ```
+3.  安装依赖
     ```bash
     npm install
     ```
 
-### Running the Development Server
+### 启动开发服务器
 
-To start the development server, run:
+运行以下命令启动开发服务器：
 
 ```bash
 npm run dev
 ```
 
-Open your browser and navigate to the URL provided in the terminal to see the application.
+在浏览器中打开终端中提供的URL即可查看应用程序。
 
-## Available Scripts
+## 📋 可用脚本
 
--   `dev`: Runs the app in development mode.
--   `build`: Builds the app for production.
--   `lint`: Lints the source code.
--   `preview`: Serves the production build locally for preview.
+-   `dev`：以开发模式运行应用程序
+-   `build`：构建生产版本
+-   `lint`：检查源代码
+-   `preview`：本地预览生产构建版本
+
+## 🎓 学习路径
+
+### 初学者路径
+
+1. **基础知识**：从[基础知识页面](/basics)开始，了解期权的基本概念
+   - 期权是什么
+   - 看涨/看跌期权
+   - 买方与卖方
+   - 希腊字母（Delta, Gamma, Theta, Vega, Rho）
+   - 权利金与波动率
+
+2. **基础策略**：学习四个基本策略
+   - 买入看涨期权 (Long Call)
+   - 买入看跌期权 (Long Put)
+   - 备兑看涨期权 (Covered Call)
+   - 保护性看跌期权 (Protective Put)
+
+3. **进阶策略**：探索更复杂的策略
+   - 价差策略（牛市、熊市）
+   - 中性策略（铁鹰、蝶式）
+   - 时间价值策略（日历价差）
+
+### 高级功能
+
+- **策略对比**：使用[对比工具](/compare)分析不同策略的风险收益特征
+- **自定义构建**：使用[构建器](/builder)创建个性化策略
+- **策略向导**：通过[向导工具](/wizard)获取适合您市场观点的策略建议
+
+## 📊 策略分类
+
+### 按市场方向分类
+
+- **看涨策略**：预期价格上涨时使用的策略
+- **看跌策略**：预期价格下跌时使用的策略
+- **中性策略**：预期价格相对稳定时使用的策略
+
+### 按复杂度分类
+
+- **基础策略**：单一期权或简单组合
+- **价差策略**：多个期权的组合
+- **高级策略**：复杂的多腿策略和套利策略
+
+## 🎨 界面特色
+
+- **响应式设计**：适配桌面和移动设备
+- **交互式图表**：可缩放、可拖动的盈亏图表
+- **实时计算**：参数调整即时反映在图表上
+- **视觉层次**：清晰的信息架构和导航
+- **新手引导**：生活化比喻和简单示例
+
+## 🤝 贡献
+
+欢迎贡献代码、报告问题或提出新功能建议！
+
+## 📄 许可证
+
+本项目采用MIT许可证。
+
+## 🔗 相关链接
+
+- [期权基础知识](/basics)
+- [策略库](/strategies)
+- [策略对比](/compare)
+- [策略构建器](/builder)
+- [策略向导](/wizard)
+
+---
+
+**免责声明**：本工具仅用于教育和研究目的。实际期权交易涉及风险，请在交易前充分了解相关风险并寻求专业建议。
