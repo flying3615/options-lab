@@ -65,7 +65,7 @@ export default function StrategyDetail() {
       </div>
       <div className="sidebar">
         <h1>{s.name}</h1>
-        {s.description && <p>{s.description}</p>}
+        {s.description && <p style={{ whiteSpace: 'pre-wrap' }}>{s.description}</p>}
 
         {s.tags && (
           <p>
